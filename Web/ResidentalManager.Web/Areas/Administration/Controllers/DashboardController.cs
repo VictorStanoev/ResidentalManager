@@ -1,9 +1,8 @@
 ﻿namespace ResidentalManager.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

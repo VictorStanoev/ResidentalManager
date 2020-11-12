@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using ResidentalManager.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using ResidentalManager.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

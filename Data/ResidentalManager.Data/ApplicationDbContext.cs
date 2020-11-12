@@ -6,11 +6,11 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using ResidentalManager.Data.Common.Models;
-    using ResidentalManager.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using ResidentalManager.Data.Common.Models;
+    using ResidentalManager.Data.Models;
+    using ResidentalManager.Data.Models.Enum;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -25,6 +25,18 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<RealEstate> RealEstates { get; set; }
+
+        public DbSet<Property> Properties { get; set; }
+
+        public DbSet<Fee> Fees { get; set; }
+
+        public DbSet<Animal> Animals { get; set; }
+
+        public DbSet<Resident> Residents { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

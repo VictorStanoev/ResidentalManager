@@ -1,8 +1,8 @@
 ﻿namespace ResidentalManager.Data.Configurations
 {
-    using ResidentalManager.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using ResidentalManager.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

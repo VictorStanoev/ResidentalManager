@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using ResidentalManager.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using ResidentalManager.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

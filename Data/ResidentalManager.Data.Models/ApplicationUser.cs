@@ -4,9 +4,8 @@ namespace ResidentalManager.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using ResidentalManager.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using ResidentalManager.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
