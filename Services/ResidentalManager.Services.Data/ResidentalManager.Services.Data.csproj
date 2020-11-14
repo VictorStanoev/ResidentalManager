@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\ResidentalManager.Data.Common\ResidentalManager.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ResidentalManager.Data.Models\ResidentalManager.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\ResidentalManager.Web.ViewModels\ResidentalManager.Web.ViewModels.csproj" />
     <ProjectReference Include="..\ResidentalManager.Services.Mapping\ResidentalManager.Services.Mapping.csproj" />
   </ItemGroup>
 

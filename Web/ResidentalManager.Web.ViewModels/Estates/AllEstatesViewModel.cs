@@ -1,15 +1,8 @@
-﻿namespace ResidentalManager.Data.Models
+﻿namespace ResidentalManager.Web.ViewModels.Estates
 {
-    using System.Collections.Generic;
-
-    using ResidentalManager.Data.Common.Models;
-
-    public class RealEstate : BaseModel<int>
+    public class AllEstatesViewModel
     {
-        public RealEstate()
-        {
-            this.Properties = new HashSet<Property>();
-        }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -40,7 +33,5 @@
         public bool Elevator { get; set; }
 
         public bool Garages { get; set; }
-
-        public virtual ICollection<Property> Properties { get; set; }
     }
 }

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Estates.AllEstatesViewModel>
+<section class="py-5">
+    <div class="container">
+        <div class="button-holder">
+            <a href="/Estates/Create" class="btn btn-primary text-uppercase">Create RealEstate</a>
+        </div>
+        <h1 style="margin: 2%; text-align: center;">RealEstates</h1>
+        <div style="padding: 5%;">
+
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        @*<th scope="col">Region</th>
+                        <th scope="col">Municipality</th>
+                        <th scope="col">Town</th>
+                        <th scope="col">PostCode</th>
+                        <th scope="col">ResidentalArea</th>
+                        <th scope="col">StreetName</th>
+                        <th scope="col">StreetNumber</th>
+                        <th scope="col">BuildingNumber</th>
+                        <th scope="col">EntranceNumber</th>*@
+                        <th scope="col">Floors</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Properties</th>
+                        <th scope="col">Properties</th>
+                        @*<th scope="col">Attics</th>
+                        <th scope="col">Basements</th>
+                        <th scope="col">Elevator</th>
+                        <th scope="col">Garages</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var realEstate in Model)
+                    {
+                        <tr>
+                            <th scope="row">@realEstate.Name</th>
+                            <td>@realEstate.Region 
+                                @realEstate.Municipality 
+                                @realEstate.Town 
+                                @realEstate.PostCode 
+                                @realEstate.ResidentalArea 
+                                @realEstate.StreetName 
+                                @realEstate.StreetNumber 
+                                @realEstate.BuildingNumber 
+                                @realEstate.EntranceNumber
+                            </td>
+                            <td>@realEstate.Floors</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/RealEstates/Edit?realEstatesId=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Properties/All?realEstatesId=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Show</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Properties/Create?realEstatesId=@realEstate.Id&name=@realEstate.Name" class="btn btn-info btn-sm text-uppercase">Add</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+       
