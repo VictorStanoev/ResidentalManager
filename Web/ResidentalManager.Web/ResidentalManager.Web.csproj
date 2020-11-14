@@ -36,4 +36,8 @@
     <ProjectReference Include="..\ResidentalManager.Web.Infrastructure\ResidentalManager.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ResidentalManager.Web.ViewModels\ResidentalManager.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Companies\" />
+  </ItemGroup>
 </Project>

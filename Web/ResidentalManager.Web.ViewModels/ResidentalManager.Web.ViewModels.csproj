@@ -23,4 +23,11 @@
     <ProjectReference Include="..\..\Services\ResidentalManager.Services.Mapping\ResidentalManager.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Companies\" />
+    <Folder Include="Properties_\" />
+    <Folder Include="Residents\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>
