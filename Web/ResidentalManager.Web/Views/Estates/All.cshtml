@@ -24,7 +24,7 @@
                         <th scope="col">EntranceNumber</th>*@
                         <th scope="col">Floors</th>
                         <th scope="col">Edit</th>
-                        <th scope="col">Properties</th>
+                        <th scope="col">Delete</th>
                         <th scope="col">Properties</th>
                         @*<th scope="col">Attics</th>
                         <th scope="col">Basements</th>
@@ -50,17 +50,17 @@
                             <td>@realEstate.Floors</td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/RealEstates/Edit?realEstatesId=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                    <a href="/Estates/Update?id=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Properties/All?realEstatesId=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Show</a>
+                                    <a href="/Estates/Delete?id=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Properties/Create?realEstatesId=@realEstate.Id&name=@realEstate.Name" class="btn btn-info btn-sm text-uppercase">Add</a>
+                                    <a href="/Properties/Create?realEstatesId=@realEstate.Id&name=@realEstate.Name" class="btn btn-info btn-sm text-uppercase">View</a>
                                 </div>
                             </td>
                         </tr>

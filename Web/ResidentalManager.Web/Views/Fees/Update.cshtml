@@ -1,5 +1,5 @@
 ﻿@model ResidentalManager.Web.ViewModels.Fees.AllFeesViewModel
-<h1>Create New Fee</h1>
+<h1 class="col-md-6 offset-md-3">Update "@Model.Name" Fee</h1>
 
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All"></div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div>
-        <input type="submit" class="btn btn-primary" />
+    <div class="col-md-6 offset-md-10">
+        <input type="submit" class="btn btn-primary" value="Update" />
     </div>
 </form>

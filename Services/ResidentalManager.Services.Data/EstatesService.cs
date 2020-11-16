@@ -43,6 +43,38 @@
             await this.repository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var fee = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+            this.repository.Delete(fee);
+            await this.repository.SaveChangesAsync();
+        }
+
+        public AllEstatesViewModel Get(int id)
+        {
+            return this.repository.All()
+                 .Where(x => x.Id == id)
+                 .Select(x => new AllEstatesViewModel
+                 {
+                     Name = x.Name,
+                     Municipality = x.Municipality,
+                     ResidentalArea = x.ResidentalArea,
+                     Region = x.Region,
+                     Town = x.Town,
+                     Floors = x.Floors,
+                     Attics = x.Attics,
+                     Basements = x.Basements,
+                     BuildingNumber = x.BuildingNumber,
+                     Elevator = x.Elevator,
+                     EntranceNumber = x.EntranceNumber,
+                     Garages = x.Garages,
+                     Id = x.Id,
+                     PostCode = x.PostCode,
+                     StreetName = x.StreetName,
+                     StreetNumber = x.StreetNumber,
+                 }).FirstOrDefault();
+        }
+
         public IEnumerable<AllEstatesViewModel> GetAll()
         {
             var estates = this.repository.All().Select(x => new AllEstatesViewModel
@@ -66,6 +98,28 @@
             }).ToList().AsEnumerable();
 
             return estates;
+        }
+
+        public void Update(int id, CreateEstatesInputModel inputModel)
+        {
+            var estate = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+            estate.Name = inputModel.Name;
+            estate.StreetNumber = inputModel.StreetNumber;
+            estate.StreetName = inputModel.StreetName;
+            estate.Attics = inputModel.Attics;
+            estate.Basements = inputModel.Basements;
+            estate.BuildingNumber = inputModel.BuildingNumber;
+            estate.Elevator = inputModel.Elevator;
+            estate.EntranceNumber = inputModel.EntranceNumber;
+            estate.Floors = inputModel.Floors;
+            estate.Garages = inputModel.Garages;
+            estate.Municipality = inputModel.Municipality;
+            estate.PostCode = inputModel.PostCode;
+            estate.Region = inputModel.Region;
+            estate.ResidentalArea = inputModel.ResidentalArea;
+            estate.Town = inputModel.Town;
+            this.repository.Update(estate);
+            this.repository.SaveChangesAsync().GetAwaiter().GetResult();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@model ResidentalManager.Web.ViewModels.Estates.CreateEstatesInputModel
-<h1>Add new RealEstate</h1>
+<h1 class="col-md-6 offset-md-3" >Add new RealEstate</h1>
 
 <form method="post"  class="col-md-6 offset-md-3">
     <div asp-validation-summary="All"></div>
@@ -83,7 +83,7 @@
         <label asp-for="@Model.Garages"></label>
     </div>
 
-    <div >
+    <div class="col-md-6 offset-md-10">
         <input type="submit" class="btn btn-primary" />
     </div>
 </form>

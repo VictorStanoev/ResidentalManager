@@ -17,12 +17,14 @@
             this.estatesService = estatesService;
         }
 
+        [HttpGet]
         public IActionResult All()
         {
             var realEstates = this.estatesService.GetAll();
             return this.View(realEstates);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             var viewModel = new CreateEstatesInputModel();
@@ -41,6 +43,33 @@
             return this.Redirect("/Estates/All");
 
             // return this.Json(inputModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.estatesService.DeleteAsync(id);
+            return this.Redirect("/Estates/All");
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var model = this.estatesService.Get(id);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(int id, CreateEstatesInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.estatesService.Get(id);
+                return this.View(model);
+            }
+
+            this.estatesService.Update(id, inputModel);
+            return this.Redirect("/Estates/All");
         }
     }
 }
