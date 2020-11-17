@@ -2,7 +2,7 @@
 <section class="py-5">
     <div class="container">
         <div class="button-holder">
-            <a href="/Estates/Create" class="btn btn-primary text-uppercase">Create RealEstate</a>
+            <a href="/Estates/Create" class="btn btn-primary text-uppercase">Create</a>
         </div>
         <h1 style="margin: 2%; text-align: center;">RealEstates</h1>
         <div style="padding: 5%;">
@@ -33,34 +33,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var realEstate in Model)
+                    @foreach (var estate in Model)
                     {
                         <tr>
-                            <th scope="row">@realEstate.Name</th>
-                            <td>@realEstate.Region 
-                                @realEstate.Municipality 
-                                @realEstate.Town 
-                                @realEstate.PostCode 
-                                @realEstate.ResidentalArea 
-                                @realEstate.StreetName 
-                                @realEstate.StreetNumber 
-                                @realEstate.BuildingNumber 
-                                @realEstate.EntranceNumber
+                            <th scope="row">@estate.Name</th>
+                            <td>@estate.Region 
+                                @estate.Municipality 
+                                @estate.Town 
+                                @estate.PostCode 
+                                @estate.ResidentalArea 
+                                @estate.StreetName 
+                                @estate.StreetNumber 
+                                @estate.BuildingNumber 
+                                @estate.EntranceNumber
                             </td>
-                            <td>@realEstate.Floors</td>
+                            <td>@estate.Floors</td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Estates/Update?id=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                    <a href="/Estates/Update?id=@estate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Estates/Delete?id=@realEstate.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                    <a href="/Estates/Delete?id=@estate.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Properties/Create?realEstatesId=@realEstate.Id&name=@realEstate.Name" class="btn btn-info btn-sm text-uppercase">View</a>
+                                    <a href="/Properties_/All?realEstateId=@estate.Id" class="btn btn-info btn-sm text-uppercase">View</a>
                                 </div>
                             </td>
                         </tr>

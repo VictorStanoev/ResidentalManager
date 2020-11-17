@@ -1,5 +1,5 @@
 ﻿@model ResidentalManager.Web.ViewModels.Fees.CreateFeesInputModel
-<h1 class="col-md-6 offset-md-3" >Create New Fee</h1>
+<h1 class="col-md-6 offset-md-3">Create New Fee</h1>
 
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All"></div>
@@ -22,8 +22,12 @@
             <span asp-validation-for="@Model.Description" class="text-danger"></span>
         </div>
     </div>
-
-    <div class="col-md-6 offset-md-10">
-        <input type="submit" class="btn btn-primary" />
+    
+    <div class="form-row">
+        <div>
+            <a href="/Fees/All" class="btn btn-primary">Go Back</a>
+        
+            <input type="submit" class="btn btn-primary" value="Create"/>
+        </div>
     </div>
 </form>

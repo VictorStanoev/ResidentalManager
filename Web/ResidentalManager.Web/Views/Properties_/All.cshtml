@@ -1,1 +1,51 @@
-﻿
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Properties_.AllPropertiesViewModel> 
+<section class="py-5">
+    <div class="container">
+        <div class="button-holder">
+            <a href="/Properties_/Create?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
+        </div>
+        <h1 style="margin: 2%; text-align: center;">Properties</h1>
+        <div style="padding: 5%;">
+
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Number</th>
+                        <th scope="col">Floor</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Common %</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Ownership</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var prop in Model)
+                    {
+                        <tr>
+                            <th scope="row">@prop.Number</th>
+                            <td>@prop.Floor</td>
+                            <td>@prop.Size</td>
+                            <td>@prop.PercentageCommonParts</td>
+                            <td>@prop.PropertyType</td>
+                            <td>@prop.PropertyOwnership</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Property/Update?id=@prop.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Property/Delete?id=@prop.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Companies\" />
-    <Folder Include="Properties_\" />
     <Folder Include="Residents\" />
     <Folder Include="Properties\" />
   </ItemGroup>

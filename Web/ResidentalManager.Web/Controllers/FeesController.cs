@@ -15,12 +15,14 @@
             this.feesService = feesService;
         }
 
+        [HttpGet]
         public IActionResult All()
         {
             var model = this.feesService.GetAll();
             return this.View(model);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
            return this.View();
@@ -38,12 +40,14 @@
             return this.Redirect("/Fees/All");
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             await this.feesService.DeleteAsync(id);
             return this.Redirect("/Fees/All");
         }
 
+        [HttpGet]
         public IActionResult Update(int id)
         {
             var model = this.feesService.Get(id);

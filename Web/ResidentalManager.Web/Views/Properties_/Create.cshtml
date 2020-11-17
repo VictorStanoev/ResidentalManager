@@ -1,1 +1,70 @@
-﻿
+﻿@model ResidentalManager.Web.ViewModels.Properties_.CreatePropertiesInputModel
+@using ResidentalManager.Data.Models.Enum
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1 class="col-md-6 offset-md-3">Create New Property</h1>
+
+<form method="post"  class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label asp-for="@Model.Number"></label>
+            <input asp-for="@Model.Number" class="form-control">
+            <span asp-validation-for="@Model.Number" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="@Model.Floor"></label>
+            <input asp-for="@Model.Floor" class="form-control">
+            <span asp-validation-for="@Model.Floor" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="@Model.Size"></label>
+            <input asp-for="@Model.Size" class="form-control">
+            <span asp-validation-for="@Model.Size" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-3">
+            <label asp-for="@Model.PercentageCommonParts"></label>
+            <input asp-for="@Model.PercentageCommonParts" class="form-control">
+            <span asp-validation-for="@Model.PercentageCommonParts" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.PropertyOwnership"></label>
+            <div>
+                <select asp-for="@Model.PropertyOwnership" class="form-control"
+                        asp-items="@Html.GetEnumSelectList<PropertyOwnership>()">
+                </select>
+            </div>
+            <span asp-validation-for="@Model.PropertyOwnership" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.PropertyType"></label>
+            <div>
+                <select asp-for="@Model.PropertyType" class="form-control"
+                        asp-items="@Html.GetEnumSelectList<PropertyType>()">
+                </select>
+            </div>
+            <span asp-validation-for="@Model.PropertyType" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Fee" class="col-md-12"></label>
+            <div class="form-group">
+                <select asp-for="@Model.FeeId" class="form-control"
+                        asp-items="@(new SelectList(Model.Fee,"Id","Name"))"></select>
+
+                <span asp-validation-for="@Model.Fee" class="text-danger"></span>
+            </div>
+            <input asp-for="@Model.RealEstateId" type="hidden" />
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div>
+            <a href="/Properties_/All?RealEstateId=@ViewData["realEstateId"]" class="btn btn-primary">Go Back</a>
+
+            <input type="submit" class="btn btn-primary" value="Create" />
+        </div>
+    </div>
+</form>
