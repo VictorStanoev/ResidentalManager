@@ -40,14 +40,37 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var property = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+            this.repository.Delete(property);
+            await this.repository.SaveChangesAsync();
         }
 
         public AllPropertiesViewModel Get(int id)
         {
-            throw new System.NotImplementedException();
+            var fees = this.feeRepository.AllAsNoTracking().Select(x => new FeeDropDown
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToList();
+
+            return this.repository.All()
+                 .Where(x => x.Id == id)
+                 .Select(x => new AllPropertiesViewModel
+                 {
+                     Number = x.Number,
+                     Floor = x.Floor,
+                     PercentageCommonParts = x.PercentageCommonParts,
+                     PropertyOwnership = x.PropertyOwnership,
+                     FeeId = x.FeeId,
+                     PropertyType = x.PropertyType,
+                     CompanyId = x.CompanyId,
+                     RealEstateId = x.RealEstateId,
+                     Size = x.Size,
+                     Id = x.Id,
+                     Fee = fees,
+                 }).FirstOrDefault();
         }
 
         public CreatePropertiesInputModel AddFee()
@@ -91,9 +114,19 @@
             return properties;
         }
 
-        public void Update(int id, CreatePropertiesInputModel inputModel)
+        public async Task Update(int id, CreatePropertiesInputModel inputModel)
         {
-            throw new System.NotImplementedException();
+            var fee = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
+            fee.Number = inputModel.Number;
+            fee.Floor = inputModel.Floor;
+            fee.FeeId = inputModel.FeeId;
+            fee.PercentageCommonParts = inputModel.PercentageCommonParts;
+            fee.PropertyOwnership = inputModel.PropertyOwnership;
+            fee.PropertyType = inputModel.PropertyType;
+            fee.RealEstateId = inputModel.RealEstateId;
+            fee.Size = inputModel.Size;
+            this.repository.Update(fee);
+            await this.repository.SaveChangesAsync();
         }
     }
 }

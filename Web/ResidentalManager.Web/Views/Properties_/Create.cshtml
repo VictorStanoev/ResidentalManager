@@ -17,6 +17,18 @@
             <input asp-for="@Model.Floor" class="form-control">
             <span asp-validation-for="@Model.Floor" class="text-danger"></span>
         </div>
+        <!--TODO: Create DropDown List for Foors as per RealEstate floors-->
+        @*<div class="form-group col-md-5">
+            <label asp-for="@Model.Floor" class=""></label>
+            <select asp-for="@Model.Floor" class="browser-default custom-select">
+                <option value="">Choose Floor</option>
+                @for (int i = 0; i < 5; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.Floor" class="text-danger"></span>
+        </div>*@
         <div class="form-group col-md-3">
             <label asp-for="@Model.Size"></label>
             <input asp-for="@Model.Size" class="form-control">

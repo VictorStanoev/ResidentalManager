@@ -15,7 +15,7 @@
 
         Task DeleteAsync(int id);
 
-        void Update(int id, CreatePropertiesInputModel inputModel);
+        Task Update(int id, CreatePropertiesInputModel inputModel);
 
         AllPropertiesViewModel Get(int id);
     }

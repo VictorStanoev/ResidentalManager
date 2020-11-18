@@ -47,10 +47,10 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int realEstateId)
         {
             await this.propertiesService.DeleteAsync(id);
-            return this.Redirect("/Fees/All");
+            return this.Redirect($"/Properties_/All?realEstateId={realEstateId}");
         }
 
         [HttpGet]
@@ -61,7 +61,7 @@
         }
 
         [HttpPost]
-        public IActionResult Update(int id, CreatePropertiesInputModel inputModel)
+        public async Task<IActionResult> Update(int id, CreatePropertiesInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -69,8 +69,8 @@
                 return this.View(model);
             }
 
-            this.propertiesService.Update(id, inputModel);
-            return this.Redirect("/Fees/All");
+            await this.propertiesService.Update(id, inputModel);
+            return this.Redirect($"/Properties_/All?realEstateId={inputModel.RealEstateId}");
         }
     }
 }
