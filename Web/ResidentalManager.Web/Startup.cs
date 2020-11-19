@@ -66,6 +66,7 @@
             services.AddTransient<IEstatesService, EstatesService>();
             services.AddTransient<IFeesService, FeesService>();
             services.AddTransient<IProperties_Service, Properties_Service>();
+            services.AddTransient<IResidentsService, ResidentsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

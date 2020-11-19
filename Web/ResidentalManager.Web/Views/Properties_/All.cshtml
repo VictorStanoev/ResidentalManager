@@ -19,30 +19,36 @@
                         <th scope="col">Ownership</th>
                         <th scope="col">Edit</th>
                         <th scope="col">Delete</th>
+                        <th scope="col">Residents</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var prop in Model)
                     {
-                        <tr>
-                            <th scope="row">@prop.Number</th>
-                            <td>@prop.Floor</td>
-                            <td>@prop.Size</td>
-                            <td>@prop.PercentageCommonParts</td>
-                            <td>@prop.PropertyType</td>
-                            <td>@prop.PropertyOwnership</td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
-                                </div>
-                            </td>
+                    <tr>
+                        <th scope="row">@prop.Number</th>
+                        <td>@prop.Floor</td>
+                        <td>@prop.Size</td>
+                        <td>@prop.PercentageCommonParts</td>
+                        <td>@prop.PropertyType</td>
+                        <td>@prop.PropertyOwnership</td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/Residents/All?PropertyId=@prop.Id" class="btn btn-info btn-sm text-uppercase">View</a>
+                            </div>
+                        </td>
 
-                        </tr>
+                    </tr>
                     }
                 </tbody>
             </table>

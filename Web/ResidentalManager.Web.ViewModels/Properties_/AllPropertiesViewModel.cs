@@ -1,8 +1,9 @@
 ﻿namespace ResidentalManager.Web.ViewModels.Properties_
 {
+    using System.Collections.Generic;
+
     using ResidentalManager.Data.Models.Enum;
     using ResidentalManager.Web.ViewModels.Fees;
-    using System.Collections.Generic;
 
     public class AllPropertiesViewModel
     {
