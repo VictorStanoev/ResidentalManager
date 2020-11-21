@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Properties_.AllPropertiesViewModel> 
 <section class="py-5">
+    <div class="button-holder">
+        <a href="/Properties_/Create?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
+    </div>
+
     <div class="container">
-        <div class="button-holder">
-            <a href="/Properties_/Create?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
-        </div>
-        <h1 style="margin: 2%; text-align: center;">Properties</h1>
-        <div style="padding: 5%;">
+        <h1 style="margin: 1%; text-align: center;">Properties</h1>
+        <div style="padding: 2%;">
 
 
             <table class="table">
@@ -25,30 +26,30 @@
                 <tbody>
                     @foreach (var prop in Model)
                     {
-                    <tr>
-                        <th scope="row">@prop.Number</th>
-                        <td>@prop.Floor</td>
-                        <td>@prop.Size</td>
-                        <td>@prop.PercentageCommonParts</td>
-                        <td>@prop.PropertyType</td>
-                        <td>@prop.PropertyOwnership</td>
-                        <td>
-                            <div class="button-holder">
-                                <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="button-holder">
-                                <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="button-holder">
-                                <a href="/Residents/All?PropertyId=@prop.Id" class="btn btn-info btn-sm text-uppercase">View</a>
-                            </div>
-                        </td>
+                        <tr>
+                            <th scope="row">@prop.Number</th>
+                            <td>@prop.Floor</td>
+                            <td>@prop.Size</td>
+                            <td>@prop.PercentageCommonParts</td>
+                            <td>@prop.PropertyType</td>
+                            <td>@prop.PropertyOwnership</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Residents/All?PropertyId=@prop.Id" class="btn btn-info btn-sm text-uppercase">View</a>
+                                </div>
+                            </td>
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>

@@ -26,7 +26,7 @@
                     {
                         <tr>
                             <th scope="row">@res.FirstName @res.MiddleName @res.LastName</th>
-                            <td>@res.DateOfBirth.ToLocalTime().ToShortDateString()</td>
+                            <td>@res.DateOfBirth.ToString("d")</td>
                             <td>@res.Telephone</td>
                             <td>@res.Email</td>
                             <td>@res.Gender</td>
