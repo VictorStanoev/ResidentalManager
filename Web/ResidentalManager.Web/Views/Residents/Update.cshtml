@@ -36,7 +36,7 @@
         </div>
         <div class="form-group col-md-4">
             <label asp-for="@Model.DateOfBirth"></label>
-            <input asp-for="@Model.DateOfBirth" class="form-control" value="@Model.DateOfBirth">
+            <input asp-for="@Model.DateOfBirth" class="form-control" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")">
             <span asp-validation-for="@Model.DateOfBirth" class="text-danger"></span>
         </div>
     </div>
@@ -75,9 +75,9 @@
 
     <div class="form-row">
         <div>
-            <a href="/Residents/All?propertyId=@ViewData["propertyId"]" class="btn btn-primary">Go Back</a>
+            <a href="/Residents/All?propertyId=@ViewData["propertyId"]&realEstateId=@ViewData["realEstateId"]" class="btn btn-primary">Go Back</a>
 
-            <input type="submit" class="btn btn-primary" value="Create" />
+            <input type="submit" class="btn btn-primary" value="Update" />
         </div>
     </div>
 </form>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ResidentalManager.Data.Models.Enum;
     using ResidentalManager.Web.ViewModels.Fees;
@@ -16,6 +17,8 @@
 
         public string LastName { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "d")]
         public DateTime DateOfBirth { get; set; }
 
         public string Telephone { get; set; }

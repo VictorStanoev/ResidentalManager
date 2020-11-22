@@ -1,58 +1,113 @@
-﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Properties_.AllPropertiesViewModel> 
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Properties_.AllPropertiesViewModel>
+@{ ViewData["Title"] = "Residents";}
 <section class="py-5">
-    <div class="button-holder">
-        <a href="/Properties_/Create?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
-    </div>
 
-    <div class="container">
-        <h1 style="margin: 1%; text-align: center;">Properties</h1>
-        <div style="padding: 2%;">
-
-
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Number</th>
-                        <th scope="col">Floor</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Common %</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Ownership</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Residents</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var prop in Model)
-                    {
-                        <tr>
-                            <th scope="row">@prop.Number</th>
-                            <td>@prop.Floor</td>
-                            <td>@prop.Size</td>
-                            <td>@prop.PercentageCommonParts</td>
-                            <td>@prop.PropertyType</td>
-                            <td>@prop.PropertyOwnership</td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Residents/All?PropertyId=@prop.Id" class="btn btn-info btn-sm text-uppercase">View</a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col">
+            <a href="/Estates/All" class="btn btn-primary text-uppercase">Go Back</a>
+            <a href="/Properties_/Create?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
         </div>
     </div>
+    <h1 class="text-uppercase text-center">Properties</h1>
+    <hr />
+    <div class="container">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="card-header text-sm-center text-uppercase">Private</h3>
+                    <table class="table small">
+                        <thead class="thead-dark text-sm-center">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Floor</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">PPL</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Residents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var prop in Model.Where(x => x.PropertyOwnership == ResidentalManager.Data.Models.Enum.PropertyOwnership.Private))
+                            {
+                                <tr class="text-sm-center">
+                                    <th scope="row">@prop.Number</th>
+                                    <td>@prop.Floor</td>
+                                    <td>@prop.PropertyType</td>
+                                    <th>@prop.Residents</th>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-warning btn-sm text-uppercase">Edit</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Residents/All?PropertyId=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">View</a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-sm-6">
+                    <h3 class="card-header text-uppercase text-sm-center">Common</h3>
+                    <table class="table">
+
+                        <thead class="thead-dark text-sm-center">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Floor</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">PPL</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Residents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var prop in Model.Where(x => x.PropertyOwnership == ResidentalManager.Data.Models.Enum.PropertyOwnership.CommonProperty))
+                            {
+                                <tr class="text-sm-center">
+                                    <th scope="row">@prop.Number</th>
+                                    <td>@prop.Floor</td>
+                                    <td>@prop.PropertyType</td>
+                                    <td>@prop.Residents</td>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Properties_/Update?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-secondary btn-sm text-uppercase">Edit</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Properties_/Delete?id=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="button-holder">
+                                            <a href="/Residents/All?PropertyId=@prop.Id&realEstateId=@prop.RealEstateId" class="btn btn-info btn-sm text-uppercase">View</a>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+   
 </section>
+
+@section ResidentsLink {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewData["realEstateId"]">Properties</a>
+    </li>
+}

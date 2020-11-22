@@ -19,14 +19,16 @@
 
         public decimal PercentageCommonParts { get; set; }
 
-        public virtual PropertyType PropertyType { get; set; }
+        public PropertyType PropertyType { get; set; }
 
-        public virtual PropertyOwnership PropertyOwnership { get; set; }
+        public PropertyOwnership PropertyOwnership { get; set; }
 
         public int FeeId { get; set; }
 
         public int? CompanyId { get; set; }
 
         public ICollection<FeeDropDown> Fee { get; set; }
+
+        public int Residents { get; set; }
     }
 }

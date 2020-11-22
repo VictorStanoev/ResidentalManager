@@ -119,6 +119,35 @@
             return residents;
         }
 
+        public IEnumerable<AllResidentsViewModel> GetAllEstateResidents(int id)
+        {
+            var fees = this.feeRepository.AllAsNoTracking().Select(x => new FeeDropDown
+            {
+                Id = x.Id,
+                Name = x.Name,
+            }).ToList();
+
+            var residents = this.resRepository.AllAsNoTracking()
+                .Where(x => x.Property.RealEstateId == id)
+                .Select(x => new AllResidentsViewModel
+                {
+                    Id = x.Id,
+                    FirstName = x.FirstName,
+                    MiddleName = x.MiddleName,
+                    LastName = x.LastName,
+                    DateOfBirth = x.DateOfBirth,
+                    Email = x.Email,
+                    Fee = fees,
+                    Gender = x.Gender,
+                    ResidentType = x.ResidentType,
+                    Telephone = x.Telephone,
+                    FeeId = x.FeeId,
+                    PropertyId = x.PropertyId,
+                }).ToList().AsEnumerable();
+
+            return residents;
+        }
+
         public async Task Update(string residentId, CreateResidentsInputModel inputModel)
         {
             var resident = this.resRepository.All().Where(x => x.Id == residentId).FirstOrDefault();
@@ -131,6 +160,7 @@
             resident.FeeId = inputModel.FeeId;
             resident.PropertyId = inputModel.PropertyId;
             resident.ResidentType = inputModel.ResidentType;
+            resident.DateOfBirth = inputModel.DateOfBirth;
             this.resRepository.Update(resident);
             await this.resRepository.SaveChangesAsync();
         }

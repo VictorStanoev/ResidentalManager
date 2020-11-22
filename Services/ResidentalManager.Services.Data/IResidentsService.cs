@@ -11,6 +11,8 @@
 
         IEnumerable<AllResidentsViewModel> GetAll(int propertyId);
 
+        IEnumerable<AllResidentsViewModel> GetAllEstateResidents(int id);
+
         CreateResidentsInputModel AddFee();
 
         Task DeleteAsync(string id);

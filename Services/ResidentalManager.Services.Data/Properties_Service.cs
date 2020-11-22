@@ -55,7 +55,7 @@
                 Name = x.Name,
             }).ToList();
 
-            return this.repository.All()
+            return this.repository.AllAsNoTracking()
                  .Where(x => x.Id == id)
                  .Select(x => new AllPropertiesViewModel
                  {
@@ -70,7 +70,8 @@
                      Size = x.Size,
                      Id = x.Id,
                      Fee = fees,
-                 }).FirstOrDefault();
+                     Residents = x.Residents.Count(),
+                 }).OrderBy(x => x.Number).FirstOrDefault();
         }
 
         public CreatePropertiesInputModel AddFee()
@@ -109,7 +110,8 @@
                 Fee = fees,
                 PropertyOwnership = x.PropertyOwnership,
                 PropertyType = x.PropertyType,
-            }).ToList().AsEnumerable();
+                Residents = x.Residents.Count(),
+            }).OrderBy(x => x.Number).ToList().AsEnumerable();
 
             return properties;
         }

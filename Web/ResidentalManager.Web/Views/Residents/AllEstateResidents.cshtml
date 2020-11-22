@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Residents.AllResidentsViewModel>
+<section class="py-5">
+    <div class="container">
+
+        <div class="button-holder">
+            <a href="/Residents/Create?PropertyId=@ViewData["propertyId"]" class="btn btn-primary text-uppercase">Create</a>
+        </div>
+        <h1 style="margin: 2%; text-align: center;">Residents</h1>
+        <div style="padding: 5%;">
+
+
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">N:</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Telephone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">ResidentType</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var res in Model)
+                    {
+                        <tr>
+                            <th scope="row">@res.FirstName @res.MiddleName @res.LastName</th>
+                            <td>@res.DateOfBirth.ToString("d")</td>
+                            <td>@res.Telephone</td>
+                            <td>@res.Email</td>
+                            <td>@res.Gender</td>
+                            <td>@res.ResidentType</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Residents/Update?id=@res.Id&propertyId=@res.PropertyId" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Residents/Delete?id=@res.Id&propertyId=@res.PropertyId" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

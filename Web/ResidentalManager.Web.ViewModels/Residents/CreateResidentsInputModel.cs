@@ -22,6 +22,8 @@
         [MinLength(3)]
         public string LastName { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "d")]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
