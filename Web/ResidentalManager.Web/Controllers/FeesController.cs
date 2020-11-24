@@ -16,16 +16,18 @@
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(int realEstateId)
         {
-            var model = this.feesService.GetAll();
+            var model = this.feesService.GetAll(realEstateId);
+            this.ViewBag.realEstateId = realEstateId;
             return this.View(model);
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(int realEstateId)
         {
-           return this.View();
+            this.ViewBag.realEstateId = realEstateId;
+            return this.View();
         }
 
         [HttpPost]
@@ -33,11 +35,11 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(inputModel.RealEstateId);
             }
 
             await this.feesService.CreateAsync(inputModel);
-            return this.Redirect("/Fees/All");
+            return this.Redirect($"/Fees/All?realEstateId={inputModel.RealEstateId}");
         }
 
         [HttpGet]
@@ -48,8 +50,9 @@
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Update(int id, int realEstateId)
         {
+            this.ViewBag.realEstateId = realEstateId;
             var model = this.feesService.Get(id);
             return this.View(model);
         }
@@ -57,6 +60,7 @@
         [HttpPost]
         public IActionResult Update(int id, CreateFeesInputModel inputModel)
         {
+            this.ViewBag.realEstateId = inputModel.RealEstateId;
             if (!this.ModelState.IsValid)
             {
                 var model = this.feesService.Get(id);
@@ -64,7 +68,7 @@
             }
 
             this.feesService.Update(id, inputModel);
-            return this.Redirect("/Fees/All");
+            return this.Redirect($"/Fees/All?realEstateId={inputModel.RealEstateId}");
         }
     }
 }

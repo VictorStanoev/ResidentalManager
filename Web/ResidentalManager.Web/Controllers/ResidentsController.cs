@@ -18,8 +18,8 @@
         [HttpGet]
         public IActionResult All(int propertyId, int realEstateId)
         {
-            this.ViewData["propertyId"] = propertyId;
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.propertyId = propertyId;
+            this.ViewBag.realEstateId = realEstateId;
             var model = this.residentsService.GetAll(propertyId);
             return this.View(model);
         }
@@ -34,8 +34,8 @@
         [HttpGet]
         public IActionResult Create(int propertyId, int realEstateId)
         {
-            this.ViewData["propertyId"] = propertyId;
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.propertyId = propertyId;
+            this.ViewBag.realEstateId = realEstateId;
             var model = this.residentsService.AddFee();
             return this.View(model);
         }
@@ -45,8 +45,8 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.ViewData["propertyId"] = propertyId;
-                this.ViewData["realEstateId"] = realEstateId;
+                this.ViewBag.propertyId = propertyId;
+                this.ViewBag.realEstateId = realEstateId;
                 var model = this.residentsService.AddFee();
                 return this.View(model);
             }
@@ -65,8 +65,8 @@
         [HttpGet]
         public IActionResult Update(string id, int propertyId, int realEstateId)
         {
-            this.ViewData["propertyId"] = propertyId;
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.propertyId = propertyId;
+            this.ViewBag.realEstateId = realEstateId;
             var model = this.residentsService.Get(id);
             return this.View(model);
         }
@@ -74,7 +74,7 @@
         [HttpPost]
         public async Task<IActionResult> Update(string id, int realEstateId, CreateResidentsInputModel inputModel)
         {
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.realEstateId = realEstateId;
             if (!this.ModelState.IsValid)
             {
                 var model = this.residentsService.Get(id);

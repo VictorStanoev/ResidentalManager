@@ -9,6 +9,8 @@
         public RealEstate()
         {
             this.Properties = new HashSet<Property>();
+
+            this.Fees = new HashSet<Fee>();
         }
 
         public string Name { get; set; }
@@ -42,5 +44,7 @@
         public bool Garages { get; set; }
 
         public virtual ICollection<Property> Properties { get; set; }
+
+        public virtual ICollection<Fee> Fees { get; set; }
     }
 }

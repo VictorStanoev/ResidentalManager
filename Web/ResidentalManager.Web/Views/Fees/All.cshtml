@@ -2,7 +2,7 @@
 <section class="py-5">
     <div class="container">
         <div class="button-holder">
-            <a href="/Fees/Create" class="btn btn-primary text-uppercase">Create</a>
+            <a href="/Fees/Create?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
         </div>
         <h1 style="margin: 2%; text-align: center;">Fees</h1>
         <div style="padding: 5%;">
@@ -27,19 +27,31 @@
                             <td>@fee.Description</td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Fees/Update?id=@fee.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                    <a href="/Fees/Update?id=@fee.Id&realEstateId=@fee.RealEstateId" class="btn btn-info btn-sm text-uppercase">Edit</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Fees/Delete?id=@fee.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                    <a href="/Fees/Delete?id=@fee.Id&realEstateId=@fee.RealEstateId" class="btn btn-info btn-sm text-uppercase">Delete</a>
                                 </div>
                             </td>
-                           
+
                         </tr>
-                     }
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+}

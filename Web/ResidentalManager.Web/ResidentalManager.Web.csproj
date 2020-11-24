@@ -40,4 +40,10 @@
   <ItemGroup>
     <Folder Include="Views\Companies\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\js\Chart.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

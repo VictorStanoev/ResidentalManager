@@ -24,15 +24,13 @@
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "d")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        [Required]
         [MaxLength(12)]
         [MinLength(1)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Enter only nubers for telephone!")]
         public string Telephone { get; set; }
 
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
 

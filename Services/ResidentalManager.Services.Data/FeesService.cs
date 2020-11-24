@@ -24,6 +24,7 @@
                 Name = inputModel.Name,
                 Price = inputModel.Price,
                 Description = inputModel.Description,
+                RealEstateId = inputModel.RealEstateId,
             };
 
             await this.repository.AddAsync(fee);
@@ -49,14 +50,17 @@
             }).FirstOrDefault();
         }
 
-        public IEnumerable<AllFeesViewModel> GetAll()
+        public IEnumerable<AllFeesViewModel> GetAll(int realEstateId)
         {
-            var fees = this.repository.AllAsNoTracking().Select(x => new AllFeesViewModel
+            var fees = this.repository.AllAsNoTracking()
+                .Where(x => x.RealEstateId == realEstateId)
+                .Select(x => new AllFeesViewModel
             {
                 Name = x.Name,
                 Price = x.Price,
                 Description = x.Description,
                 Id = x.Id,
+                RealEstateId = x.RealEstateId,
             }).AsEnumerable();
 
             return fees;

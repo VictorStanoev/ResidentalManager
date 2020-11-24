@@ -1,0 +1,90 @@
+﻿@using ResidentalManager.Common
+@{
+    this.ViewData["Title"] = "Property";
+}
+<div class="container">
+    <div class="row row-cols-2">
+        <div class="col">
+            <div id="chartContainer" ></div>
+        </div>
+        <div class="col">
+            <div id="chartContainer2" ></div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer2",
+            {
+                title: {
+                    text: "Gaming Consoles Sold in 2012"
+                },
+                legend: {
+                    maxWidth: 350,
+                    itemWidth: 120
+                },
+                data: [
+                    {
+                        type: "pie",
+                        showInLegend: true,
+                        legendText: "{indexLabel}",
+                        dataPoints: [
+                            { y: 4181563, indexLabel: "PlayStation 3" },
+                            { y: 2175498, indexLabel: "Wii" },
+                            { y: 3125844, indexLabel: "Xbox 360" },
+                            { y: 1176121, indexLabel: "Nintendo DS" },
+                            { y: 1727161, indexLabel: "PSP" },
+                            { y: 4303364, indexLabel: "Nintendo 3DS" },
+                            { y: 1717786, indexLabel: "PS Vita" }
+                        ]
+                    }
+                ]
+            });
+
+        var chart2 = new CanvasJS.Chart("chartContainer", {
+            theme: "light1",
+            animationEnabled: true,
+            title: {
+                text: "Simple Column Chart in ASP.NET MVC"
+            },
+            subtitles: [
+                { text: "Try Resizing the Browser" }
+            ],
+            data: [
+                {
+                    type: "column", //change type to bar, line, area, pie, etc
+                    dataPoints: [
+                        { x: 10, y: 71 , indexLabel: "Test"},
+                        { x: 20, y: 55 },
+                        { x: 30, y: 50 },
+                        { x: 40, y: 65 },
+                        { x: 50, y: 95 },
+                        { x: 60, y: 68 },
+                        { x: 70, y: 28 },
+                        { x: 80, y: 34 },
+                        { x: 90, y: 14 }
+                    ]
+                }
+            ]
+        });
+        chart.render();
+        chart2.render();
+    }
+</script>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+}
+
+

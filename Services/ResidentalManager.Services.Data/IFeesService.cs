@@ -9,7 +9,7 @@
     {
         Task CreateAsync(CreateFeesInputModel inputModel);
 
-        IEnumerable<AllFeesViewModel> GetAll();
+        IEnumerable<AllFeesViewModel> GetAll(int realEstateId);
 
         Task DeleteAsync(int id);
 

@@ -14,9 +14,9 @@
         <div style="padding: 5%;">
 
 
-            <table class="table text-sm-center" >
-                <thead class="table-dark">
-                    <tr class="col-sm-auto">
+            <table class="table small">
+                <thead class="thead-dark text-sm-center">
+                    <tr class="text-sm-center">
                         <th scope="col">Name</th>
                         <th>Birthdate</th>
                         <th>Telephone</th>
@@ -30,21 +30,21 @@
                 <tbody>
                     @foreach (var res in Model)
                     {
-                        <tr class="col-sm-auto">
+                        <tr class="text-sm-center">
                             <th scope="row">@res.FirstName @res.MiddleName @res.LastName</th>
-                            <td>@res.DateOfBirth.ToString("d")</td>
+                            <td>@res.DateOfBirth?.ToString("d")</td>
                             <td>@res.Telephone</td>
                             <td>@res.Email</td>
                             <td>@res.Gender</td>
                             <td>@res.ResidentType</td>
                             <td>
-                                <div class="button-holder">
-                                    <a href="/Residents/Update?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-info btn-sm text-uppercase">Edit</a>
+                                <div class="button-holder ">
+                                    <a href="/Residents/Update?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm text-uppercase btn-warning">Edit</a>
                                 </div>
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a href="/Residents/Delete?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-info btn-sm text-uppercase">Delete</a>
+                                    <a href="/Residents/Delete?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm btn-danger text-uppercase">Delete</a>
                                 </div>
                             </td>
 
@@ -56,8 +56,15 @@
     </div>
 </section>
 
-@section ResidentsLink {
+@section PropertyLinks {
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewData["realEstateId"]">Properties</a>
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
     </li>
 }
+

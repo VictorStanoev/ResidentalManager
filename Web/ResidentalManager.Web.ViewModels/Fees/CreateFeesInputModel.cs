@@ -17,5 +17,8 @@
 
         [MaxLength(300)]
         public string Description { get; set; }
+
+        [Required]
+        public int RealEstateId { get; set; }
     }
 }

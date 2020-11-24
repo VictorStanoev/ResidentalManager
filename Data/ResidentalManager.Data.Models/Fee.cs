@@ -22,6 +22,10 @@
 
         public string Description { get; set; }
 
+        public int RealEstateId { get; set; }
+
+        public RealEstate RealEstate { get; set; }
+
         public virtual ICollection<Property> PropertyFees { get; set; }
 
         public virtual ICollection<Resident> ResidentFees { get; set; }

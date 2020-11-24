@@ -19,7 +19,7 @@
         public IActionResult All(int realEstateId)
         {
             var model = this.propertiesService.GetAll(realEstateId);
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.realEstateId = realEstateId;
 
             return this.View(model);
         }
@@ -27,7 +27,7 @@
         [HttpGet]
         public IActionResult Create(int realEstateId)
         {
-            this.ViewData["realEstateId"] = realEstateId;
+            this.ViewBag.realEstateId = realEstateId;
             var model = this.propertiesService.AddFee();
             return this.View(model);
         }
@@ -37,7 +37,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.ViewData["realEstateId"] = realEstateId;
+                this.ViewBag.realEstateId = realEstateId;
                 var model = this.propertiesService.AddFee();
                 return this.View(model);
             }
