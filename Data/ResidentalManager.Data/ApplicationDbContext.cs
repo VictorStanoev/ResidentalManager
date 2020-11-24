@@ -38,6 +38,12 @@
 
         public DbSet<Company> Companies { get; set; }
 
+        public DbSet<RealEstateExpence> RealEstateExpences { get; set; }
+
+        public DbSet<RealEstateExpenceOther> RealEstateExpencesOther { get; set; }
+
+        public DbSet<RealEstateExpenceRegular> RealEstateExpencesRegular { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
