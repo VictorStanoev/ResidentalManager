@@ -13,6 +13,8 @@
             this.Fees = new HashSet<Fee>();
 
             this.Expences = new HashSet<RealEstateExpence>();
+
+            this.Taxes = new HashSet<Tax>();
         }
 
         public string Name { get; set; }
@@ -50,5 +52,7 @@
         public virtual ICollection<Fee> Fees { get; set; }
 
         public virtual ICollection<RealEstateExpence> Expences { get; set; }
+
+        public virtual ICollection<Tax> Taxes { get; set; }
     }
 }

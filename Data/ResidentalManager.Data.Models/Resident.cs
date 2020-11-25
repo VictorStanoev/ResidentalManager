@@ -34,12 +34,12 @@
         [ForeignKey(nameof(Property))]
         public int PropertyId { get; set; }
 
-        public virtual Property Property { get; set; }
+        public Property Property { get; set; }
 
         [ForeignKey(nameof(Fee))]
 
         public int FeeId { get; set; }
 
-        public virtual Fee ResidentFee { get; set; }
+        public Fee ResidentFee { get; set; }
     }
 }

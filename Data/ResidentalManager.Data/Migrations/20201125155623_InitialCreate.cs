@@ -255,6 +255,33 @@
                 });
 
             migrationBuilder.CreateTable(
+                name: "RealEstateExpences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Month = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    TotalExpences = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    RealEstateId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RealEstateExpences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RealEstateExpences_RealEstates_RealEstateId",
+                        column: x => x.RealEstateId,
+                        principalTable: "RealEstates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Properties",
                 columns: table => new
                 {
@@ -366,6 +393,42 @@
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Taxes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Month = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    RealEstateId = table.Column<int>(type: "int", nullable: false),
+                    PropertyId = table.Column<int>(type: "int", nullable: false),
+                    PropertyTax = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ResidentsTax = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    AnimalTax = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Taxes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Taxes_Properties_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Properties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Taxes_RealEstates_RealEstateId",
+                        column: x => x.RealEstateId,
+                        principalTable: "RealEstates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_FeeId",
                 table: "Animals",
@@ -468,6 +531,16 @@
                 column: "RealEstateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RealEstateExpences_IsDeleted",
+                table: "RealEstateExpences",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RealEstateExpences_RealEstateId",
+                table: "RealEstateExpences",
+                column: "RealEstateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Residents_FeeId",
                 table: "Residents",
                 column: "FeeId");
@@ -486,6 +559,21 @@
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_IsDeleted",
+                table: "Taxes",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_PropertyId",
+                table: "Taxes",
+                column: "PropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_RealEstateId",
+                table: "Taxes",
+                column: "RealEstateId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -509,10 +597,16 @@
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "RealEstateExpences");
+
+            migrationBuilder.DropTable(
                 name: "Residents");
 
             migrationBuilder.DropTable(
                 name: "Settings");
+
+            migrationBuilder.DropTable(
+                name: "Taxes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

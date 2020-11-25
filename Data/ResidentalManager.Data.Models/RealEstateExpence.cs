@@ -7,13 +7,6 @@
 
     public class RealEstateExpence : BaseDeletableModel<int>
     {
-        public RealEstateExpence()
-        {
-            this.ExpencesOther = new HashSet<RealEstateExpenceOther>();
-
-            this.ExpencesRegular = new HashSet<RealEstateExpenceRegular>();
-        }
-
         public Month Month { get; set; }
 
         public int Year { get; set; }
@@ -22,10 +15,8 @@
 
         public int RealEstateId { get; set; }
 
-        public virtual RealEstate RealEstate { get; set; }
+        public RealEstate RealEstate { get; set; }
 
-        public virtual ICollection<RealEstateExpenceOther> ExpencesOther { get; set; }
-
-        public virtual ICollection<RealEstateExpenceRegular> ExpencesRegular { get; set; }
+        public string Description { get; set; }
     }
 }

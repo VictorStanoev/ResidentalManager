@@ -10,7 +10,7 @@ using ResidentalManager.Data;
 namespace ResidentalManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201122162018_InitialCreate")]
+    [Migration("20201125155623_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -490,6 +490,49 @@ namespace ResidentalManager.Data.Migrations
                     b.ToTable("RealEstates");
                 });
 
+            modelBuilder.Entity("ResidentalManager.Data.Models.RealEstateExpence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalExpences")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("RealEstateExpences");
+                });
+
             modelBuilder.Entity("ResidentalManager.Data.Models.Resident", b =>
                 {
                     b.Property<string>("Id")
@@ -578,6 +621,60 @@ namespace ResidentalManager.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("ResidentalManager.Data.Models.Tax", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<decimal>("AnimalTax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PropertyTax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ResidentsTax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PropertyId");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Taxes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -686,6 +783,17 @@ namespace ResidentalManager.Data.Migrations
                     b.Navigation("RealEstate");
                 });
 
+            modelBuilder.Entity("ResidentalManager.Data.Models.RealEstateExpence", b =>
+                {
+                    b.HasOne("ResidentalManager.Data.Models.RealEstate", "RealEstate")
+                        .WithMany("Expences")
+                        .HasForeignKey("RealEstateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("RealEstate");
+                });
+
             modelBuilder.Entity("ResidentalManager.Data.Models.Resident", b =>
                 {
                     b.HasOne("ResidentalManager.Data.Models.Fee", "ResidentFee")
@@ -703,6 +811,25 @@ namespace ResidentalManager.Data.Migrations
                     b.Navigation("Property");
 
                     b.Navigation("ResidentFee");
+                });
+
+            modelBuilder.Entity("ResidentalManager.Data.Models.Tax", b =>
+                {
+                    b.HasOne("ResidentalManager.Data.Models.Property", "Property")
+                        .WithMany("Taxes")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ResidentalManager.Data.Models.RealEstate", "RealEstate")
+                        .WithMany("Taxes")
+                        .HasForeignKey("RealEstateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Property");
+
+                    b.Navigation("RealEstate");
                 });
 
             modelBuilder.Entity("ResidentalManager.Data.Models.ApplicationUser", b =>
@@ -733,13 +860,19 @@ namespace ResidentalManager.Data.Migrations
                     b.Navigation("Animals");
 
                     b.Navigation("Residents");
+
+                    b.Navigation("Taxes");
                 });
 
             modelBuilder.Entity("ResidentalManager.Data.Models.RealEstate", b =>
                 {
+                    b.Navigation("Expences");
+
                     b.Navigation("Fees");
 
                     b.Navigation("Properties");
+
+                    b.Navigation("Taxes");
                 });
 #pragma warning restore 612, 618
         }
