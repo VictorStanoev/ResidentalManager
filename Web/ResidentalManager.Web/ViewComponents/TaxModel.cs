@@ -11,6 +11,5 @@
         public Month Month { get; set; }
 
         public string Total { get; set; }
-
     }
 }

@@ -1,59 +1,63 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Residents.AllResidentsViewModel>
-<section class="py-5">
-    <div class="container">
+<section class="py-4">
+    <h1 class="text-uppercase text-center">Residents</h1>
 
-        <div class="row">
-            <div>
-                <a href="/Properties_/All?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Go Back</a>
-            </div>
-            <div>
-                <a href="/Residents/Create?PropertyId=@ViewData["propertyId"]&realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
-            </div>
+
+    <div class="row">
+        <div >
+            <a href="/Properties_/All?realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Go Back</a>
         </div>
-        <h1 style="margin: 2%; text-align: center;">Residents</h1>
-        <div style="padding: 5%;">
-
-
-            <table class="table small">
-                <thead class="thead-dark text-sm-center">
-                    <tr class="text-sm-center">
-                        <th scope="col">Name</th>
-                        <th>Birthdate</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>ResidentType</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var res in Model)
-                    {
-                        <tr class="text-sm-center">
-                            <th scope="row">@res.FirstName @res.MiddleName @res.LastName</th>
-                            <td>@res.DateOfBirth?.ToString("d")</td>
-                            <td>@res.Telephone</td>
-                            <td>@res.Email</td>
-                            <td>@res.Gender</td>
-                            <td>@res.ResidentType</td>
-                            <td>
-                                <div class="button-holder ">
-                                    <a href="/Residents/Update?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm text-uppercase btn-warning">Edit</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Residents/Delete?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm btn-danger text-uppercase">Delete</a>
-                                </div>
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
+        <div>
+            
+        </div>
+        <div >
+            <a href="/Residents/Create?PropertyId=@ViewData["propertyId"]&realEstateId=@ViewData["realEstateId"]" class="btn btn-primary text-uppercase">Create</a>
         </div>
     </div>
+
+    <hr />
+
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark text-center">
+                <tr class="text-sm-center">
+                    <th scope="col">Name</th>
+                    <th>Birthdate</th>
+                    <th>Telephone</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>ResidentType</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var res in Model)
+                {
+                    <tr class="text-center">
+                        <th scope="row">@res.FirstName @res.MiddleName @res.LastName</th>
+                        <td>@res.DateOfBirth?.ToString("d")</td>
+                        <td>@res.Telephone</td>
+                        <td>@res.Email</td>
+                        <td>@res.Gender</td>
+                        <td>@res.ResidentType</td>
+                        <td>
+                            <div class="button-holder ">
+                                <a href="/Residents/Update?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm text-uppercase btn-warning">Edit</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="button-holder">
+                                <a href="/Residents/Delete?id=@res.Id&propertyId=@res.PropertyId&realEstateId=@ViewData["realEstateId"]" class="btn btn-sm btn-danger text-uppercase">Delete</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 </section>
 
 @section PropertyLinks {

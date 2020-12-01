@@ -1,9 +1,10 @@
 ﻿namespace ResidentalManager.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Mvc;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Taxes;
-    using System.Threading.Tasks;
 
     public class TaxesController : BaseController
     {
@@ -34,6 +35,27 @@
 
             await this.taxesService.GenerateTaxes(realEstateId, inputModel);
 
+            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+        }
+
+        public async Task<IActionResult> Pay(int id, int realEstateId)
+        {
+            this.ViewBag.realEstateId = realEstateId;
+            await this.taxesService.Pay(id);
+            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+        }
+
+        public async Task<IActionResult> ReversePayment(int id, int realEstateId)
+        {
+            this.ViewBag.realEstateId = realEstateId;
+            await this.taxesService.ReversePayment(id);
+            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+        }
+
+        public async Task<IActionResult> UpdateTax(int id, int realEstateId)
+        {
+            this.ViewBag.realEstateId = realEstateId;
+            await this.taxesService.UpdateTax(id);
             return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
         }
     }

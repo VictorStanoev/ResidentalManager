@@ -10,5 +10,11 @@
         IEnumerable<AllTaxesViewModel> GetAllEstateTaxes(int realEstateId);
 
         Task GenerateTaxes(int realEstateId, GenerateTaxesInputModel inputModel);
+
+        Task Pay(int id);
+
+        Task ReversePayment(int id);
+
+        Task UpdateTax(int id);
     }
 }

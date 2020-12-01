@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
     using ResidentalManager.Web.ViewModels.Taxes;
@@ -74,6 +75,51 @@
                .AsEnumerable();
 
             return taxes;
+        }
+
+        public async Task Pay(int id)
+        {
+            var tax = this.taxRepository.All()
+                .Where(x => x.Id == id).FirstOrDefault();
+
+            if (tax != null)
+            {
+                tax.IsPaid = true;
+                this.taxRepository.Update(tax);
+                await this.taxRepository.SaveChangesAsync();
+            }
+        }
+
+        public async Task ReversePayment(int id)
+        {
+            var tax = this.taxRepository.All()
+                .Where(x => x.Id == id).FirstOrDefault();
+
+            if (tax != null)
+            {
+                tax.IsPaid = false;
+                this.taxRepository.Update(tax);
+                await this.taxRepository.SaveChangesAsync();
+            }
+        }
+
+        public async Task UpdateTax(int id)
+        {
+            var tax = this.taxRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            var property = this.propertyRepository.All().Where(x => x.Id == tax.PropertyId).FirstOrDefault();
+
+            tax.PropertyTax = property.PropertyFee.Price;
+            tax.ResidentsTax = property.Residents.Sum(x => x.ResidentFee.Price);
+            tax.AnimalTax = 0;
+            tax.Total = property.PropertyFee.Price + property.Residents.Sum(x => x.ResidentFee.Price);
+            tax.IsPaid = false;
+
+            this.taxRepository.Update(tax);
+            await this.taxRepository.SaveChangesAsync();
         }
     }
 }
