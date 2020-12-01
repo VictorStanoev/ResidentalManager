@@ -9,10 +9,10 @@
 
         public string VatNumber { get; set; }
 
-        public ResidentType ResidentType { get; set; }
+        public virtual ResidentType ResidentType { get; set; }
 
         public int PropertyId { get; set; }
 
-        public Property Property { get; set; }
+        public virtual Property Property { get; set; }
     }
 }

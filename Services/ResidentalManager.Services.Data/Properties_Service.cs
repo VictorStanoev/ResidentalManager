@@ -74,10 +74,12 @@
                  }).OrderBy(x => x.Number).FirstOrDefault();
         }
 
-        public CreatePropertiesInputModel AddFee()
+        public CreatePropertiesInputModel AddFee(int realEstateId)
         {
             var model = new CreatePropertiesInputModel();
-            var feeCollection = this.feeRepository.AllAsNoTracking()
+            var feeCollection = this.feeRepository
+                .AllAsNoTracking()
+                .Where(x => x.RealEstateId == realEstateId)
                 .Select(x => new FeeDropDown
             {
                 Id = x.Id,

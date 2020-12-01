@@ -1,0 +1,51 @@
+﻿@model ResidentalManager.Web.ViewModels.Taxes.GenerateTaxesInputModel
+@using ResidentalManager.Data.Models.Enum
+
+<h1 class="col-md-6 offset-md-3">Generate Taxes</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Year"></label>
+            <input asp-for="@Model.Year" class="form-control">
+            <span asp-validation-for="@Model.Year" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="@Model.Month"></label>
+            <div>
+                <select asp-for="@Model.Month" class="form-control"
+                        asp-items="@Html.GetEnumSelectList<Month>()">
+                </select>
+            </div>
+            <span asp-validation-for="@Model.Month" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div>
+            <a href="/Properties_/All?RealEstateId=@ViewBag.realEstateId" ]" class="btn btn-primary">Go Back</a>
+
+            <input type="submit" class="btn btn-primary" value="Generate" />
+        </div>
+    </div>
+</form>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
+    </li>
+}

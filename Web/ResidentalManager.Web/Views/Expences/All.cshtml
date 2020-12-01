@@ -1,37 +1,44 @@
-﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Fees.AllFeesViewModel>
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Expences.AllExpencesViewModel>
+@{ ViewData["Title"] = "Expences";}
 <section class="py-4">
-    <h1 class="text-uppercase text-center">Fees</h1>
+    <h1 class="text-uppercase text-center">Expences</h1>
 
     <div class="button-holder">
-        <a href="/Fees/Create?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
+        <a href="/Expences/Create?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
     </div>
     <hr />
+
     <div class="container">
+
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Bill</th>
+                    <th scope="col">Amount</th>
                     <th scope="col">Description</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var fee in Model)
+                @foreach (var expence in Model)
                 {
                     <tr>
-                        <th scope="row">@fee.Name</th>
-                        <td>@fee.Price</td>
-                        <td>@fee.Description</td>
+                        <th scope="row">@expence.Year</th>
+                        <td>@expence.Month</td>
+                        <td>@expence.ExpenceType</td>
+                        <td>@expence.Amount лв.</td>
+                        <td>@expence.Description</td>
                         <td>
                             <div class="button-holder">
-                                <a href="/Fees/Update?id=@fee.Id&realEstateId=@fee.RealEstateId" class="btn btn-warning btn-sm text-uppercase">Edit</a>
+                                <a href="/Expences/Update?id=@expence.Id&realEstateId=@expence.RealEstateId" class="btn btn-warning btn-sm text-uppercase">Edit</a>
                             </div>
                         </td>
                         <td>
                             <div class="button-holder">
-                                <a href="/Fees/Delete?id=@fee.Id&realEstateId=@fee.RealEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
+                                <a href="/Expences/Delete?id=@expence.Id&realEstateId=@expence.RealEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
                             </div>
                         </td>
 

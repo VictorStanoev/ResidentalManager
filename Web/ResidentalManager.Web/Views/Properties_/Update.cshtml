@@ -8,15 +8,16 @@
     <div asp-validation-summary="All"></div>
     <div class="form-row">
         <div class="form-group col-md-3">
-            <label asp-for="@Model.Number"></label>
-            <input asp-for="@Model.Number" class="form-control" value="@Model.Number">
-            <span asp-validation-for="@Model.Number" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-3">
             <label asp-for="@Model.Floor"></label>
             <input asp-for="@Model.Floor" class="form-control" value="@Model.Floor">
             <span asp-validation-for="@Model.Floor" class="text-danger"></span>
         </div>
+        <div class="form-group col-md-3">
+            <label asp-for="@Model.Number"></label>
+            <input asp-for="@Model.Number" class="form-control" value="@Model.Number">
+            <span asp-validation-for="@Model.Number" class="text-danger"></span>
+        </div>
+        
         <div class="form-group col-md-3">
             <label asp-for="@Model.Size"></label>
             <input asp-for="@Model.Size" class="form-control" value="@Model.Size">
@@ -78,5 +79,11 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
     </li>
 }

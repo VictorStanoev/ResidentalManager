@@ -17,7 +17,7 @@
 
         public int RealEstateId { get; set; }
 
-        public RealEstate RealEstate { get; set; }
+        public virtual RealEstate RealEstate { get; set; }
 
         public int Number { get; set; }
 
@@ -27,19 +27,19 @@
 
         public decimal PercentageCommonParts { get; set; }
 
-        public PropertyType PropertyType { get; set; }
+        public virtual PropertyType PropertyType { get; set; }
 
-        public PropertyOwnership PropertyOwnership { get; set; }
+        public virtual PropertyOwnership PropertyOwnership { get; set; }
 
         [ForeignKey(nameof(Fee))]
         public int FeeId { get; set; }
 
-        public Fee PropertyFee { get; set; }
+        public virtual Fee PropertyFee { get; set; }
 
         [ForeignKey(nameof(Company))]
         public int? CompanyId { get; set; }
 
-        public Company Company { get; set; }
+        public virtual Company Company { get; set; }
 
         public virtual ICollection<Resident> Residents { get; set; }
 

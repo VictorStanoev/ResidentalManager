@@ -1,74 +1,68 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Estates.AllEstatesViewModel>
-<section class="py-5">
-    <div class="container">
-        <div class="button-holder">
-            <a href="/Estates/Create" class="btn btn-primary text-uppercase">Create</a>
-        </div>
-        <h1 style="margin: 2%; text-align: center;">RealEstates</h1>
-        <div style="padding: 5%;">
+@{ ViewData["Title"] = "Real Estates";}
+<section class="py-4">
 
+    <h1 class="text-uppercase text-center">Real Estates</h1>
 
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        @*<th scope="col">Region</th>
-                        <th scope="col">Municipality</th>
-                        <th scope="col">Town</th>
-                        <th scope="col">PostCode</th>
-                        <th scope="col">ResidentalArea</th>
-                        <th scope="col">StreetName</th>
-                        <th scope="col">StreetNumber</th>
-                        <th scope="col">BuildingNumber</th>
-                        <th scope="col">EntranceNumber</th>*@
-                        <th scope="col">Floors</th>
-                        <th scope="col">Edit</th>
-                        <th scope="col">Delete</th>
-                        <th scope="col">Select</th>
-                        @*<th scope="col">Attics</th>
-                        <th scope="col">Basements</th>
-                        <th scope="col">Elevator</th>
-                        <th scope="col">Garages</th>*@
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var estate in Model)
-                    {
-                        <tr>
-                            <th scope="row">@estate.Name</th>
-                            <td>@estate.Region 
-                                @estate.Municipality 
-                                @estate.Town 
-                                @estate.PostCode 
-                                @estate.ResidentalArea 
-                                @estate.StreetName 
-                                @estate.StreetNumber 
-                                @estate.BuildingNumber 
-                                @estate.EntranceNumber
-                            </td>
-                            <td>@estate.Floors</td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Estates/Update?id=@estate.Id" class="btn btn-info btn-sm text-uppercase">Edit</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/Estates/Delete?id=@estate.Id" class="btn btn-info btn-sm text-uppercase">Delete</a>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="button-holder">
-                                    <a href="/PropertyHome/Index?realEstateId=@estate.Id" class="btn btn-info btn-sm text-uppercase">Use</a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+    <div class="button-holder">
+        <a href="/Estates/Create" class="btn btn-primary text-uppercase">Create</a>
     </div>
+
+    <hr />
+    <div class="container">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Floors</th>
+                    <th scope="col">Select</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var estate in Model)
+                {
+                <tr>
+
+                    <th scope="row">@estate.Name</th>
+                    <td>
+                        @estate.Region
+                        @estate.Municipality
+                        @estate.Town
+                        @estate.PostCode
+                        @estate.ResidentalArea
+                        @estate.StreetName
+                        @estate.StreetNumber
+                        @estate.BuildingNumber
+                        @estate.EntranceNumber
+                    </td>
+                    <td>@estate.Floors</td>
+                    <td>
+                        <div class="button-holder">
+                            <a href="/PropertyHome/Index?realEstateId=@estate.Id" class="btn  btn-success btn-sm text-uppercase">Use</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="button-holder">
+                            <a href="/Estates/Update?id=@estate.Id" class="btn btn-warning btn-sm text-uppercase">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="button-holder">
+                            <a href="/Estates/Delete?id=@estate.Id" class="btn btn-danger btn-sm text-uppercase">Delete</a>
+                        </div>
+                    </td>
+
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 </section>
 
-       

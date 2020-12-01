@@ -7,15 +7,17 @@
 
     public class RealEstateExpence : BaseDeletableModel<int>
     {
-        public Month Month { get; set; }
+        public virtual Month Month { get; set; }
 
         public int Year { get; set; }
 
-        public decimal TotalExpences { get; set; }
+        public virtual ExpenceType ExpenceType { get; set; }
+
+        public decimal Amount { get; set; }
 
         public int RealEstateId { get; set; }
 
-        public RealEstate RealEstate { get; set; }
+        public virtual RealEstate RealEstate { get; set; }
 
         public string Description { get; set; }
     }

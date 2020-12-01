@@ -1,0 +1,46 @@
+﻿@model List<ResidentalManager.Web.ViewComponents.YearTaxesViewModel>
+
+
+    <table class="table table-responsive">
+        <thead class="thead-dark text-sm-center">
+            <tr class="text-sm-center">
+                <th scope="col">Num</th>
+                <th>Jan</th>
+                <th>Feb</th>
+                <th>March</th>
+                <th>April</th>
+                <th>May</th>
+                <th>June</th>
+                <th>July</th>
+                <th>August</th>
+                <th>Sep</th>
+                <th>Oct</th>
+                <th>Nov</th>
+                <th>Dec</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var tax in Model.OrderByDescending(x => x.ApartmenNumber))
+            {
+                <tr class="text-sm-center">
+                    <th scope="row">@tax.ApartmenNumber</th>
+                    <td>@tax.Jan</td>
+                    <td>@tax.Feb</td>
+                    <td>@tax.March</td>
+                    <td>@tax.April</td>
+                    <td>@tax.May</td>
+                    <td>@tax.June</td>
+                    <td>@tax.July</td>
+                    <td>@tax.August</td>
+                    <td>@tax.Sept</td>
+                    <td>@tax.Oct</td>
+                    <td>@tax.Nov</td>
+                    <td>@tax.Dec</td>
+                    
+                </tr>
+            }
+
+        </tbody>
+    </table>
+

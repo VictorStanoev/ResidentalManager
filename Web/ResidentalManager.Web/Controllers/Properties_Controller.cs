@@ -28,7 +28,7 @@
         public IActionResult Create(int realEstateId)
         {
             this.ViewBag.realEstateId = realEstateId;
-            var model = this.propertiesService.AddFee();
+            var model = this.propertiesService.AddFee(realEstateId);
             return this.View(model);
         }
 
@@ -38,7 +38,7 @@
             if (!this.ModelState.IsValid)
             {
                 this.ViewBag.realEstateId = realEstateId;
-                var model = this.propertiesService.AddFee();
+                var model = this.propertiesService.AddFee(realEstateId);
                 return this.View(model);
             }
 

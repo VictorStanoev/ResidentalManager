@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Taxes.AllTaxesViewModel>
+@{ ViewData["Title"] = "Taxes";}
+<section class="py-4">
+    <h1 class="text-uppercase text-center">Taxes</h1>
+    <div class="row">
+        <div class="col">
+            <a href="/Taxes/Generate?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Generate</a>
+        </div>
+    </div>
+    <hr />
+
+    <div class="container">
+
+        <table class="table">
+            <thead class="thead-dark text-sm-center">
+                <tr class="text-sm-center">
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Number</th>
+                    <th>PropertyTax</th>
+                    <th>ResidentsTax</th>
+                    <th>AnimalTax</th>
+                    <th>Total</th>
+                    <th>Payed</th>
+                    <th>Pay</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var tax in Model)
+                {
+                    <tr class="text-sm-center">
+                        <td>@tax.Year</td>
+                        <td>@tax.Month</td>
+                        <td class="text-xl-center">@tax.PropertyNumber</td>
+                        <td>@tax.PropertyTax лв.</td>
+                        <td>@tax.ResidentsTax лв.</td>
+                        <td>@tax.AnimalTax лв.</td>
+                        <td class="font-weight-bold">@tax.Total лв.</td>
+                        <td>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="@tax.IsPaid" class="form-check-input">
+                            </div>
+                        </td>
+                        @if (tax.IsPaid == false)
+                        {
+                            <td>
+                                <div class="button-holder ">
+                                    <a href="/Taxes/Pay?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-success">Pay</a>
+                                </div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <div class="button-holder ">
+                                    <a href="/Taxes/ReversePayment?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-danger">Rev.</a>
+                                </div>
+                            </td>
+                        }
+
+                        <td>
+                            <div class="button-holder ">
+                                <a href="/Taxes/Update?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-warning">Update</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
+    </li>
+}

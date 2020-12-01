@@ -24,7 +24,7 @@
 
         public int RealEstateId { get; set; }
 
-        public RealEstate RealEstate { get; set; }
+        public virtual RealEstate RealEstate { get; set; }
 
         public virtual ICollection<Property> PropertyFees { get; set; }
 

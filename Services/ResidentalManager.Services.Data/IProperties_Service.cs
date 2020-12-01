@@ -11,7 +11,7 @@
 
         IEnumerable<AllPropertiesViewModel> GetAll(int realEstateId);
 
-        CreatePropertiesInputModel AddFee();
+        CreatePropertiesInputModel AddFee(int realEstateId);
 
         Task DeleteAsync(int id);
 
