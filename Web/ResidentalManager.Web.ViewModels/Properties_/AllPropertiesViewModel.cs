@@ -30,5 +30,7 @@
         public ICollection<FeeDropDown> Fee { get; set; }
 
         public int Residents { get; set; }
+
+        public int Animals { get; set; }
     }
 }

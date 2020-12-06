@@ -2,7 +2,7 @@
 {
     using ResidentalManager.Data.Models.Enum;
 
-    public class GenerateTaxesInputModel
+    public class TaxesGenerateInputModel
     {
         public int Year { get; set; }
 

@@ -71,7 +71,8 @@
                      Id = x.Id,
                      Fee = fees,
                      Residents = x.Residents.Count(),
-                 }).OrderBy(x => x.Number).FirstOrDefault();
+                     Animals = x.Animals.Count(),
+                 }).OrderByDescending(x => x.Number).FirstOrDefault();
         }
 
         public CreatePropertiesInputModel AddFee(int realEstateId)
@@ -113,7 +114,8 @@
                 PropertyOwnership = x.PropertyOwnership,
                 PropertyType = x.PropertyType,
                 Residents = x.Residents.Count(),
-            }).OrderBy(x => x.Number).ToList().AsEnumerable();
+                Animals = x.Animals.Count(),
+            }).OrderByDescending(x => x.Number).ToList().AsEnumerable();
 
             return properties;
         }

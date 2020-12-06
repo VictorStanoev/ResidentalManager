@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Taxes.AllTaxesViewModel>
+﻿@*@model IEnumerable<ResidentalManager.Web.ViewModels.Taxes.TaxViewModel>*@
+@model ResidentalManager.Web.ViewModels.Taxes.TaxesListViewModel
 @{ ViewData["Title"] = "Taxes";}
 <section class="py-4">
     <h1 class="text-uppercase text-center">Taxes</h1>
@@ -28,7 +29,7 @@
             </thead>
             <tbody>
 
-                @foreach (var tax in Model)
+                @foreach (var tax in Model.Taxes)
                 {
                     <tr class="text-sm-center">
                         <td>@tax.Year</td>
@@ -54,8 +55,8 @@
                         else
                         {
                             <td>
-                                <div class="button-holder ">
-                                    <a href="/Taxes/ReversePayment?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-danger">Rev.</a>
+                                <div class="button-holder" >
+                                    <a href="/Taxes/ReversePayment?id=@tax.Id&realEstateId=@ViewBag.realEstateId"  class="btn btn-sm text-uppercase btn-danger">Rev.</a>
                                 </div>
                             </td>
                         }
@@ -71,6 +72,37 @@
             </tbody>
         </table>
     </div>
+    <hr />
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
+                <a class="page-link" asp-action="All" asp-route-realEstateId="@ViewBag.realEstateId" asp-route-pageNum="@Model.PreviousPageNumber">Previous</a>
+            </li>
+            @for (int i = Model.PageNumber - 4; i < Model.PageNumber; i++)
+            {
+                if (i > 0)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-realEstateId="@ViewBag.realEstateId" asp-route-pageNum="@i">@i</a></li>
+                }
+            }
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    @Model.PageNumber
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 4; i++)
+            {
+                if (i <= Model.PagesCount)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-realEstateId="@ViewBag.realEstateId" asp-route-pageNum="@i">@i</a></li>
+                }
+            }
+            <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
+                <a class="page-link" asp-action="All" asp-route-realEstateId="@ViewBag.realEstateId" asp-route-pageNum="@Model.NextPageNumber">Next</a>
+            </li>
+        </ul>
+    </nav>
 </section>
 
 @section PropertyLinks {
@@ -90,3 +122,4 @@
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
     </li>
 }
+

@@ -5,8 +5,8 @@
     using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Data;
-    using ResidentalManager.Data.Models;
 
     [ViewComponent(Name = "YearTaxes")]
     public class YearTaxesViewComponent : ViewComponent
@@ -30,7 +30,7 @@
                     PropertyId = x.PropertyId,
                     PropertyNumber = x.Property.Number,
                     Month = x.Month,
-                    Total = x.Total.ToString(),
+                    Total = x.Total + GlobalConstants.Currency.ToString(),
                 })
                 .ToList();
 
@@ -54,80 +54,82 @@
 
             foreach (var tax in taxesDic.Values)
             {
-                var yearTax = new YearTaxesViewModel();
-                yearTax.ApartmenNumber = tax
-                    .Select(x => x.PropertyNumber).First();
+                var yearTax = new YearTaxesViewModel
+                {
+                    ApartmenNumber = tax
+                    .Select(x => x.PropertyNumber).First(),
+                };
                 foreach (var item in tax)
                 {
                     if (item.Month == Data.Models.Enum.Month.January)
                     {
-                        yearTax.Jan = item.Total;
+                        yearTax.TaxJan = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.February)
                     {
-                        yearTax.Feb = item.Total;
+                        yearTax.TaxFeb = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.March)
                     {
-                        yearTax.March = item.Total;
+                        yearTax.TaxMarch = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.April)
                     {
-                        yearTax.April = item.Total;
+                        yearTax.TaxApril = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.May)
                     {
-                        yearTax.May = item.Total;
+                        yearTax.TaxMay = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.June)
                     {
-                        yearTax.June = item.Total;
+                        yearTax.TaxJune = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.July)
                     {
-                        yearTax.July = item.Total;
+                        yearTax.TaxJuly = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.August)
                     {
-                        yearTax.August = item.Total;
+                        yearTax.TaxAugust = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.September)
                     {
-                        yearTax.Sept = item.Total;
+                        yearTax.TaxSept = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.October)
                     {
-                        yearTax.Oct = item.Total;
+                        yearTax.TaxOct = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.November)
                     {
-                        yearTax.Nov = item.Total;
+                        yearTax.TaxNov = item.Total;
                         continue;
                     }
 
                     if (item.Month == Data.Models.Enum.Month.December)
                     {
-                        yearTax.Dec = item.Total;
+                        yearTax.TaxDec = item.Total;
                         continue;
                     }
                 }

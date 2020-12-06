@@ -15,10 +15,10 @@
             this.taxesService = taxesService;
         }
 
-        public IActionResult All(int realEstateId)
+        public IActionResult All(int realEstateId, int pageNum = 1)
         {
             this.ViewBag.realEstateId = realEstateId;
-            var model = this.taxesService.GetAllEstateTaxes(realEstateId);
+            var model = this.taxesService.GetAllEstateTaxes(realEstateId, pageNum);
             return this.View(model);
         }
 
@@ -29,13 +29,13 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Generate(int realEstateId, GenerateTaxesInputModel inputModel)
+        public async Task<IActionResult> Generate(int realEstateId, TaxesGenerateInputModel inputModel)
         {
             this.ViewBag.realEstateId = realEstateId;
 
             await this.taxesService.GenerateTaxes(realEstateId, inputModel);
 
-            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", new { realEstateId });
         }
 
         public async Task<IActionResult> Pay(int id, int realEstateId)

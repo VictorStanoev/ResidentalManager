@@ -1,46 +1,50 @@
 ﻿@model List<ResidentalManager.Web.ViewComponents.YearTaxesViewModel>
 
-
-    <table class="table table-responsive">
-        <thead class="thead-dark text-sm-center">
-            <tr class="text-sm-center">
-                <th scope="col">Num</th>
-                <th>Jan</th>
-                <th>Feb</th>
-                <th>March</th>
-                <th>April</th>
-                <th>May</th>
-                <th>June</th>
-                <th>July</th>
-                <th>August</th>
-                <th>Sep</th>
-                <th>Oct</th>
-                <th>Nov</th>
-                <th>Dec</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var tax in Model.OrderByDescending(x => x.ApartmenNumber))
-            {
-                <tr class="text-sm-center">
-                    <th scope="row">@tax.ApartmenNumber</th>
-                    <td>@tax.Jan</td>
-                    <td>@tax.Feb</td>
-                    <td>@tax.March</td>
-                    <td>@tax.April</td>
-                    <td>@tax.May</td>
-                    <td>@tax.June</td>
-                    <td>@tax.July</td>
-                    <td>@tax.August</td>
-                    <td>@tax.Sept</td>
-                    <td>@tax.Oct</td>
-                    <td>@tax.Nov</td>
-                    <td>@tax.Dec</td>
-                    
+<section class="container align-content-center">
+    <h1 class="text-uppercase text-center">Payed taxes for @DateTime.UtcNow.Year </h1>
+    <hr />
+    <div class="text-center">
+        <table class="table table-responsive-sm ">
+            <thead class="thead-dark text-center">
+                <tr class="text-center">
+                    <th scope="col">Number</th>
+                    <th>Jan</th>
+                    <th>Feb</th>
+                    <th>March</th>
+                    <th>April</th>
+                    <th>May</th>
+                    <th>June</th>
+                    <th>July</th>
+                    <th>August</th>
+                    <th>Sep</th>
+                    <th>Oct</th>
+                    <th>Nov</th>
+                    <th>Dec</th>
                 </tr>
-            }
+            </thead>
+            <tbody>
 
-        </tbody>
-    </table>
+                @foreach (var tax in Model.OrderByDescending(x => x.ApartmenNumber))
+                {
+                    <tr class="text-center">
+                        <th scope="row">@tax.ApartmenNumber</th>
+                        <td>@tax.TaxJan</td>
+                        <td>@tax.TaxFeb</td>
+                        <td>@tax.TaxMarch</td>
+                        <td>@tax.TaxApril</td>
+                        <td>@tax.TaxMay</td>
+                        <td>@tax.TaxJune</td>
+                        <td>@tax.TaxJuly</td>
+                        <td>@tax.TaxAugust</td>
+                        <td>@tax.TaxSept</td>
+                        <td>@tax.TaxOct</td>
+                        <td>@tax.TaxNov</td>
+                        <td>@tax.TaxDec</td>
 
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</section>

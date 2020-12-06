@@ -2,7 +2,7 @@
 {
     using ResidentalManager.Data.Models.Enum;
 
-    public class AllTaxesViewModel
+    public class TaxViewModel
     {
         public int Id { get; set; }
 

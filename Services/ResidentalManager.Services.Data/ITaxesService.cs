@@ -7,14 +7,16 @@
 
     public interface ITaxesService
     {
-        IEnumerable<AllTaxesViewModel> GetAllEstateTaxes(int realEstateId);
+        TaxesListViewModel GetAllEstateTaxes(int realEstateId, int pageNum);
 
-        Task GenerateTaxes(int realEstateId, GenerateTaxesInputModel inputModel);
+        Task GenerateTaxes(int realEstateId, TaxesGenerateInputModel inputModel);
 
         Task Pay(int id);
 
         Task ReversePayment(int id);
 
         Task UpdateTax(int id);
+
+        int GetCount();
     }
 }

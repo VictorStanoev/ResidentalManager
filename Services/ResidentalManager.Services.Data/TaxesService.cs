@@ -12,19 +12,19 @@
     {
         private readonly IDeletableEntityRepository<Tax> taxRepository;
         private readonly IDeletableEntityRepository<Property> propertyRepository;
-        private readonly IDeletableEntityRepository<Fee> feeReposiotory;
+        private readonly IRepository<RealEstate> realEstateReposiotory;
 
         public TaxesService(
             IDeletableEntityRepository<Tax> taxRepository,
             IDeletableEntityRepository<Property> propertyRepository,
-            IDeletableEntityRepository<Fee> feeReposiotory)
+            IRepository<RealEstate> realEstateReposiotory)
         {
             this.taxRepository = taxRepository;
             this.propertyRepository = propertyRepository;
-            this.feeReposiotory = feeReposiotory;
+            this.realEstateReposiotory = realEstateReposiotory;
         }
 
-        public async Task GenerateTaxes(int realEstateId, GenerateTaxesInputModel inputModel)
+        public async Task GenerateTaxes(int realEstateId, TaxesGenerateInputModel inputModel)
         {
             var properties = this.propertyRepository
                 .All()
@@ -42,7 +42,7 @@
                     PropertyId = prop.Id,
                     PropertyTax = prop.PropertyFee.Price,
                     ResidentsTax = prop.Residents.Sum(x => x.ResidentFee.Price),
-                    AnimalTax = 0,
+                    AnimalTax = prop.Animals.Sum(x => x.AnimalFee.Price),
                     Total = prop.PropertyFee.Price + prop.Residents.Sum(x => x.ResidentFee.Price),
                 };
 
@@ -52,12 +52,19 @@
             await this.taxRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AllTaxesViewModel> GetAllEstateTaxes(int realEstateId)
+        public TaxesListViewModel GetAllEstateTaxes(int realEstateId, int pageNum)
         {
+            var properties = this.realEstateReposiotory
+                .All().Where(x => x.Id == realEstateId)
+                .Select(x => x.Properties.Count()).FirstOrDefault();
+
             var taxes = this.taxRepository
                .AllAsNoTracking()
                .Where(x => x.RealEstateId == realEstateId)
-               .Select(x => new AllTaxesViewModel()
+               .OrderByDescending(x => x.Year)
+               .ThenByDescending(x => x.Month)
+               .Skip((pageNum - 1) * properties).Take(properties)
+               .Select(x => new TaxViewModel()
                {
                    Id = x.Id,
                    PropertyTax = x.PropertyTax,
@@ -69,12 +76,23 @@
                    Year = x.Year,
                    PropertyNumber = x.Property.Number,
                })
-               .OrderByDescending(x => x.Year)
-               .ThenByDescending(x => x.Month)
-               .ThenByDescending(x => x.PropertyNumber)
+               .OrderByDescending(x => x.PropertyNumber)
                .AsEnumerable();
 
-            return taxes;
+            var model = new TaxesListViewModel
+            {
+                PageNumber = pageNum,
+                ItemsPerPage = properties,
+                TaxesCount = this.GetCount(),
+                Taxes = taxes,
+            };
+
+            return model;
+        }
+
+        public int GetCount()
+        {
+            return this.taxRepository.All().Count();
         }
 
         public async Task Pay(int id)
@@ -114,7 +132,7 @@
 
             tax.PropertyTax = property.PropertyFee.Price;
             tax.ResidentsTax = property.Residents.Sum(x => x.ResidentFee.Price);
-            tax.AnimalTax = 0;
+            tax.AnimalTax = property.Animals.Sum(x => x.AnimalFee.Price);
             tax.Total = property.PropertyFee.Price + property.Residents.Sum(x => x.ResidentFee.Price);
             tax.IsPaid = false;
 
