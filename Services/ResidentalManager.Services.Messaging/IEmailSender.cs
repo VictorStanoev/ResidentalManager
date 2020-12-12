@@ -9,6 +9,7 @@
             string from,
             string fromName,
             string to,
+            string toName,
             string subject,
             string htmlContent,
             IEnumerable<EmailAttachment> attachments = null);

@@ -9,23 +9,23 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             <label asp-for="@Model.Floor"></label>
-            <input asp-for="@Model.Floor" class="form-control" value="@Model.Floor">
+            <input asp-for="@Model.Floor" class="form-control">
             <span asp-validation-for="@Model.Floor" class="text-danger"></span>
         </div>
         <div class="form-group col-md-3">
             <label asp-for="@Model.Number"></label>
-            <input asp-for="@Model.Number" class="form-control" value="@Model.Number">
+            <input asp-for="@Model.Number" class="form-control">
             <span asp-validation-for="@Model.Number" class="text-danger"></span>
         </div>
-        
+
         <div class="form-group col-md-3">
             <label asp-for="@Model.Size"></label>
-            <input asp-for="@Model.Size" class="form-control" value="@Model.Size">
+            <input asp-for="@Model.Size" class="form-control">
             <span asp-validation-for="@Model.Size" class="text-danger"></span>
         </div>
         <div class="form-group col-md-3">
             <label asp-for="@Model.PercentageCommonParts"></label>
-            <input asp-for="@Model.PercentageCommonParts" class="form-control" value="@Model.PercentageCommonParts">
+            <input asp-for="@Model.PercentageCommonParts" class="form-control">
             <span asp-validation-for="@Model.PercentageCommonParts" class="text-danger"></span>
         </div>
     </div>
@@ -72,9 +72,6 @@
 
 @section PropertyLinks {
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
@@ -85,5 +82,8 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }

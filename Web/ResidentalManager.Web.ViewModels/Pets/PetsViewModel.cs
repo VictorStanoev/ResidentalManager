@@ -1,13 +1,12 @@
-﻿namespace ResidentalManager.Web.ViewModels.Animals
+﻿namespace ResidentalManager.Web.ViewModels.Pets
 {
     using System.Collections.Generic;
 
     using ResidentalManager.Web.ViewModels.Fees;
 
-    public class AnimalsInputModel
+    public class PetsViewModel
     {
-        public int Id{ get; set; }
-
+        public int Id { get; set; }
         public string Breed { get; set; }
 
         public string Comment { get; set; }

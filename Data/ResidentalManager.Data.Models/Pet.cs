@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using ResidentalManager.Data.Common.Models;
 
-    public class Animal : BaseDeletableModel<int>
+    public class Pet : BaseDeletableModel<int>
     {
         public string Breed { get; set; }
 
@@ -19,6 +19,6 @@
         [ForeignKey(nameof(Fee))]
         public int FeeId { get; set; }
 
-        public virtual Fee AnimalFee { get; set; }
+        public virtual Fee PetFee { get; set; }
     }
 }

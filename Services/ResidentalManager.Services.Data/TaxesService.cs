@@ -2,10 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
+    using ResidentalManager.Data.Models.Enum;
     using ResidentalManager.Web.ViewModels.Taxes;
 
     public class TaxesService : ITaxesService
@@ -42,7 +44,7 @@
                     PropertyId = prop.Id,
                     PropertyTax = prop.PropertyFee.Price,
                     ResidentsTax = prop.Residents.Sum(x => x.ResidentFee.Price),
-                    AnimalTax = prop.Animals.Sum(x => x.AnimalFee.Price),
+                    PetTax = prop.Pets.Sum(x => x.PetFee.Price),
                     Total = prop.PropertyFee.Price + prop.Residents.Sum(x => x.ResidentFee.Price),
                 };
 
@@ -69,7 +71,7 @@
                    Id = x.Id,
                    PropertyTax = x.PropertyTax,
                    ResidentsTax = x.ResidentsTax,
-                   AnimalTax = x.AnimalTax,
+                   PetTax = x.PetTax,
                    Total = x.Total.ToString(),
                    IsPaid = x.IsPaid,
                    Month = x.Month,
@@ -83,16 +85,50 @@
             {
                 PageNumber = pageNum,
                 ItemsPerPage = properties,
-                TaxesCount = this.GetCount(),
+                TaxesCount = this.GetCount(realEstateId),
                 Taxes = taxes,
             };
 
             return model;
         }
 
-        public int GetCount()
+        public int GetCount(int realEstateId)
         {
-            return this.taxRepository.All().Count();
+            return this.taxRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
+        }
+
+        public TaxReceiptViewModel GetReceiptInfo(int id)
+        {
+            var firstName = string.Empty;
+            var lastName = string.Empty;
+            var email = string.Empty;
+
+            var owner = this.taxRepository
+            .All().Where(x => x.Id == id)
+            .Select(x => x.Property.Residents
+            .Where(x => x.ResidentType == ResidentType.Owner))
+            .FirstOrDefault()
+            .FirstOrDefault();
+
+            if (owner != null)
+            {
+                firstName = owner.FirstName;
+                lastName = owner.LastName;
+                email = owner.Email;
+            }
+
+            var model = this.taxRepository
+            .All().Where(x => x.Id == id)
+            .Select(x => new TaxReceiptViewModel
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                Title = $"Платена такса за {x.Month} {x.Year}г.",
+                Content = $"Здравейте, {firstName} {lastName}, успешно беше заплатена такса за {x.Month} {x.Year}г. на стойност {x.Total} лв.",
+            }).FirstOrDefault();
+
+            return model;
         }
 
         public async Task Pay(int id)
@@ -132,12 +168,13 @@
 
             tax.PropertyTax = property.PropertyFee.Price;
             tax.ResidentsTax = property.Residents.Sum(x => x.ResidentFee.Price);
-            tax.AnimalTax = property.Animals.Sum(x => x.AnimalFee.Price);
+            tax.PetTax = property.Pets.Sum(x => x.PetFee.Price);
             tax.Total = property.PropertyFee.Price + property.Residents.Sum(x => x.ResidentFee.Price);
             tax.IsPaid = false;
 
             this.taxRepository.Update(tax);
             await this.taxRepository.SaveChangesAsync();
         }
+
     }
 }

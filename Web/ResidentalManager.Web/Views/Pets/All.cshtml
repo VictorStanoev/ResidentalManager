@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Pets.PetsViewModel>
+@{
+    ViewBag.Title = "Pets";
+}
+
+<section class="py-4">
+    <h1 class="text-uppercase text-center">@ViewBag.Title</h1>
+    <div class="row">
+        <div>
+            <a href="/Properties_/All?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Go Back</a>
+        </div>
+        <div>
+            <a href="/Pets/Create?propertyId=@ViewBag.propertyId&realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
+        </div>
+    </div>
+    <hr />
+    <div class="container">
+
+        <div class="col">
+
+            <table class="table ">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">Breed</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pet in Model)
+                    {
+                        <tr class="text-center">
+                            <th scope="row">@pet.Breed</th>
+                            <td>@pet.Comment</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Pets/Update?id=@pet.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-warning btn-sm text-uppercase">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a href="/Pets/Delete?id=@pet.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
+                                </div>
+                            </td>
+
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
+    </li>
+}

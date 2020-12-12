@@ -32,7 +32,7 @@
 
         public DbSet<Fee> Fees { get; set; }
 
-        public DbSet<Animal> Animals { get; set; }
+        public DbSet<Pet> Pets { get; set; }
 
         public DbSet<Resident> Residents { get; set; }
 

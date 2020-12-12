@@ -71,7 +71,7 @@
                      Id = x.Id,
                      Fee = fees,
                      Residents = x.Residents.Count(),
-                     Animals = x.Animals.Count(),
+                     Pets = x.Pets.Count(),
                  }).OrderByDescending(x => x.Number).FirstOrDefault();
         }
 
@@ -114,7 +114,7 @@
                 PropertyOwnership = x.PropertyOwnership,
                 PropertyType = x.PropertyType,
                 Residents = x.Residents.Count(),
-                Animals = x.Animals.Count(),
+                Pets = x.Pets.Count(),
             }).OrderByDescending(x => x.Number).ToList().AsEnumerable();
 
             return properties;

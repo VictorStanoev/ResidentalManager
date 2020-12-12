@@ -17,6 +17,8 @@
 
         Task UpdateTax(int id);
 
-        int GetCount();
+        int GetCount(int realEstateId);
+
+        TaxReceiptViewModel GetReceiptInfo(int id);
     }
 }

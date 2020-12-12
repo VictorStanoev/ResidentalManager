@@ -17,7 +17,7 @@
             this.client = new SendGridClient(apiKey);
         }
 
-        public async Task SendEmailAsync(string from, string fromName, string to, string subject, string htmlContent, IEnumerable<EmailAttachment> attachments = null)
+        public async Task SendEmailAsync(string from, string fromName, string to, string toName, string subject, string htmlContent, IEnumerable<EmailAttachment> attachments = null)
         {
             if (string.IsNullOrWhiteSpace(subject) && string.IsNullOrWhiteSpace(htmlContent))
             {
@@ -25,7 +25,7 @@
             }
 
             var fromAddress = new EmailAddress(from, fromName);
-            var toAddress = new EmailAddress(to);
+            var toAddress = new EmailAddress(to, toName);
             var message = MailHelper.CreateSingleEmail(fromAddress, toAddress, subject, null, htmlContent);
             if (attachments?.Any() == true)
             {
