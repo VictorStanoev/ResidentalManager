@@ -12,7 +12,7 @@
         {
             this.PropertyFees = new HashSet<Property>();
             this.ResidentFees = new HashSet<Resident>();
-            this.PetFees = new HashSet<Pet>();
+            this.AnimalFees = new HashSet<Animal>();
         }
 
         [Required]
@@ -30,6 +30,6 @@
 
         public virtual ICollection<Resident> ResidentFees { get; set; }
 
-        public virtual ICollection<Pet> PetFees { get; set; }
+        public virtual ICollection<Animal> AnimalFees { get; set; }
     }
 }

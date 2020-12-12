@@ -22,7 +22,7 @@
 
         public decimal? ResidentsTax { get; set; }
 
-        public decimal? PetTax { get; set; }
+        public decimal? AnimalTax { get; set; }
 
         public decimal? Total { get; set; }
 

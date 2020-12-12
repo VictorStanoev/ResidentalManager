@@ -12,16 +12,16 @@
     <div>
         @await Component.InvokeAsync("YearTaxes", new { realEstateId = ViewBag.realEstateId })
     </div>
-
+    
     @*<div class="table">
-            <div class="col-6 ">
-                <div id="chartContainer"></div>
-            </div>
-            <div class="col-6 ">
-                <div id="chartContainer2"></div>
-            </div>
+        <div class="col-6 ">
+            <div id="chartContainer"></div>
+        </div>
+        <div class="col-6 ">
+            <div id="chartContainer2"></div>
+        </div>
 
-        </div>*@
+    </div>*@
 
 
 
@@ -29,6 +29,7 @@
 
 
 <section>
+    
 </section>
 
 
@@ -94,6 +95,9 @@
 
 @section PropertyLinks {
     <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
@@ -104,9 +108,6 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }
 

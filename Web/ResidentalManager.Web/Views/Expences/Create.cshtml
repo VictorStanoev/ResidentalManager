@@ -18,7 +18,7 @@
 
         <div class="form-group col-md-4">
             <label asp-for="@Model.Year"></label>
-            <input asp-for="@Model.Year" class="form-control" value="@DateTime.UtcNow.Year">
+            <input asp-for="@Model.Year" class="form-control">
             <span asp-validation-for="@Model.Year" class="text-danger"></span>
         </div>
 
@@ -61,6 +61,9 @@
 
 @section PropertyLinks {
     <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
@@ -71,8 +74,5 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }

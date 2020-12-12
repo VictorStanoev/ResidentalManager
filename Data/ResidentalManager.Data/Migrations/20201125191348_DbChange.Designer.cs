@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResidentalManager.Data;
 
 namespace ResidentalManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201125191348_DbChange")]
+    partial class DbChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -631,7 +633,7 @@ namespace ResidentalManager.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<decimal?>("AnimalTax")
+                    b.Property<decimal>("AnimalTax")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -655,16 +657,13 @@ namespace ResidentalManager.Data.Migrations
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("PropertyTax")
+                    b.Property<decimal>("PropertyTax")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("ResidentsTax")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("Total")
+                    b.Property<decimal>("ResidentsTax")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Year")

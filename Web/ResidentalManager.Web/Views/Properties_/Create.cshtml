@@ -17,7 +17,7 @@
             <input asp-for="@Model.Number" class="form-control">
             <span asp-validation-for="@Model.Number" class="text-danger"></span>
         </div>
-
+        
         <!--TODO: Create DropDown List for Foors as per RealEstate floors-->
         @*<div class="form-group col-md-5">
                 <label asp-for="@Model.Floor" class=""></label>
@@ -84,6 +84,9 @@
 
 @section PropertyLinks {
     <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
@@ -94,8 +97,5 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }

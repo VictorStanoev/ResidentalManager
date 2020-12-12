@@ -31,6 +31,6 @@
 
         public int Residents { get; set; }
 
-        public int Pets { get; set; }
+        public int Animals { get; set; }
     }
 }

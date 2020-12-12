@@ -10,8 +10,8 @@ using ResidentalManager.Data;
 namespace ResidentalManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201210184526_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201125183828_ChangedPropertyAtrRealEstateExpence")]
+    partial class ChangedPropertyAtrRealEstateExpence
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,6 +123,48 @@ namespace ResidentalManager.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ResidentalManager.Data.Models.Animal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Breed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FeeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeeId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("Animals");
                 });
 
             modelBuilder.Entity("ResidentalManager.Data.Models.ApplicationRole", b =>
@@ -324,48 +366,6 @@ namespace ResidentalManager.Data.Migrations
                     b.ToTable("Fees");
                 });
 
-            modelBuilder.Entity("ResidentalManager.Data.Models.Pet", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Breed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FeeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PropertyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FeeId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PropertyId");
-
-                    b.ToTable("Pets");
-                });
-
             modelBuilder.Entity("ResidentalManager.Data.Models.Property", b =>
                 {
                     b.Property<int>("Id")
@@ -509,9 +509,6 @@ namespace ResidentalManager.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ExpenceType")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -633,6 +630,9 @@ namespace ResidentalManager.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<decimal>("AnimalTax")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -651,22 +651,16 @@ namespace ResidentalManager.Data.Migrations
                     b.Property<int>("Month")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("PetTax")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("PropertyTax")
+                    b.Property<decimal>("PropertyTax")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RealEstateId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("ResidentsTax")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("Total")
+                    b.Property<decimal>("ResidentsTax")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Year")
@@ -734,6 +728,25 @@ namespace ResidentalManager.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ResidentalManager.Data.Models.Animal", b =>
+                {
+                    b.HasOne("ResidentalManager.Data.Models.Fee", "AnimalFee")
+                        .WithMany("AnimalFees")
+                        .HasForeignKey("FeeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ResidentalManager.Data.Models.Property", "Property")
+                        .WithMany("Animals")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AnimalFee");
+
+                    b.Navigation("Property");
+                });
+
             modelBuilder.Entity("ResidentalManager.Data.Models.Fee", b =>
                 {
                     b.HasOne("ResidentalManager.Data.Models.RealEstate", "RealEstate")
@@ -743,25 +756,6 @@ namespace ResidentalManager.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("RealEstate");
-                });
-
-            modelBuilder.Entity("ResidentalManager.Data.Models.Pet", b =>
-                {
-                    b.HasOne("ResidentalManager.Data.Models.Fee", "PetFee")
-                        .WithMany("PetFees")
-                        .HasForeignKey("FeeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("ResidentalManager.Data.Models.Property", "Property")
-                        .WithMany("Pets")
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("PetFee");
-
-                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("ResidentalManager.Data.Models.Property", b =>
@@ -854,7 +848,7 @@ namespace ResidentalManager.Data.Migrations
 
             modelBuilder.Entity("ResidentalManager.Data.Models.Fee", b =>
                 {
-                    b.Navigation("PetFees");
+                    b.Navigation("AnimalFees");
 
                     b.Navigation("PropertyFees");
 
@@ -863,7 +857,7 @@ namespace ResidentalManager.Data.Migrations
 
             modelBuilder.Entity("ResidentalManager.Data.Models.Property", b =>
                 {
-                    b.Navigation("Pets");
+                    b.Navigation("Animals");
 
                     b.Navigation("Residents");
 

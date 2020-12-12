@@ -20,11 +20,10 @@
             var repository = new Mock<IDeletableEntityRepository<Setting>>();
             repository.Setup(r => r.All()).Returns(new List<Setting>
                                                         {
-                                                            new Setting() { Name = "Test2", Value = "1" },
-                                                            new Setting() { Name = "Test3", Value = "2" },
-                                                            new Setting() { Name = "Test4", Value = "3" },
+                                                            new Setting(),
+                                                            new Setting(),
+                                                            new Setting(),
                                                         }.AsQueryable());
-
             var service = new SettingsService(repository.Object);
             Assert.Equal(3, service.GetCount());
             repository.Verify(x => x.All(), Times.Once);

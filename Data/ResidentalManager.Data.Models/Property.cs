@@ -11,7 +11,7 @@
         public Property()
         {
             this.Taxes = new HashSet<Tax>();
-            this.Pets = new HashSet<Pet>();
+            this.Animals = new HashSet<Animal>();
             this.Residents = new HashSet<Resident>();
         }
 
@@ -43,7 +43,7 @@
 
         public virtual ICollection<Resident> Residents { get; set; }
 
-        public virtual ICollection<Pet> Pets { get; set; }
+        public virtual ICollection<Animal> Animals { get; set; }
 
         public virtual ICollection<Tax> Taxes { get; set; }
     }

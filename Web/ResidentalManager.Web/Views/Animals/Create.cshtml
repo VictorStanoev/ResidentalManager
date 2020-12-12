@@ -1,7 +1,7 @@
-﻿@model ResidentalManager.Web.ViewModels.Pets.PetsInputModel
+﻿@model ResidentalManager.Web.ViewModels.Animals.AnimalsInputModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<h1 class="text-center">Add Pet</h1>
+<h1 class="text-center">Add Animal</h1>
 
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All"></div>
@@ -33,7 +33,7 @@
     <div>
         <input asp-for="@Model.PropertyId" type="hidden" />
     </div>
-
+  
 
 
     <div class="form-row">
@@ -47,6 +47,9 @@
 
 @section PropertyLinks {
     <li class="nav-item">
+        <a class="nav-link text-dark" href="/PropertyHome/Index?realEstateId=@ViewBag.realEstateId">Main</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
@@ -57,8 +60,5 @@
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }

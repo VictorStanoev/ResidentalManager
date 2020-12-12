@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class ReportsController : BaseController
+    public class PropertyHomeController : BaseController
     {
-        public ReportsController()
+        public PropertyHomeController()
         {
         }
 
