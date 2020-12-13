@@ -67,12 +67,15 @@
                             <a href="/Taxes/UpdateTax?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-warning">Update</a>
                         </div>
                     </td>
-
-                    <td>
-                        <div class="button-holder ">
-                            <a href="/Taxes/Receipt?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-warning">Send</a>
-                        </div>
-                    </td>
+                    @if (tax.IsPaid == true)
+                    {
+                        <td>
+                            <div class="button-holder ">
+                                <a href="/Taxes/Receipt?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-info">Send</a>
+                            </div>
+                        </td>
+                    }
+                    
                 </tr>
                 }
 

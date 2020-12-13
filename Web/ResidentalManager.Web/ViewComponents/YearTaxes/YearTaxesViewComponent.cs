@@ -42,8 +42,10 @@
 
                 if (!taxesDic.ContainsKey(item.PropertyId))
                 {
-                    taxesDic[id] = new List<TaxModel>();
-                    taxesDic[id].Add(item);
+                    taxesDic[id] = new List<TaxModel>
+                    {
+                        item,
+                    };
                     continue;
                 }
 

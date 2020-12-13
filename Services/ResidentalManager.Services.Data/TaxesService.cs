@@ -169,7 +169,7 @@
             tax.PropertyTax = property.PropertyFee.Price;
             tax.ResidentsTax = property.Residents.Sum(x => x.ResidentFee.Price);
             tax.PetTax = property.Pets.Sum(x => x.PetFee.Price);
-            tax.Total = property.PropertyFee.Price + property.Residents.Sum(x => x.ResidentFee.Price);
+            tax.Total = property.PropertyFee.Price + property.Residents.Sum(x => x.ResidentFee.Price) + property.Pets.Sum(x => x.PetFee.Price);
             tax.IsPaid = false;
 
             this.taxRepository.Update(tax);
