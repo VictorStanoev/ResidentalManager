@@ -125,7 +125,10 @@
                 LastName = lastName,
                 Email = email,
                 Title = $"Платена такса за {x.Month} {x.Year}г.",
-                Content = $"Здравейте, {firstName} {lastName}, успешно беше заплатена такса за {x.Month} {x.Year}г. на стойност {x.Total} лв.",
+                Content =
+                $"Здравейте, {firstName} {lastName}, успешно беше заплатена такса за {x.Month} {x.Year}г. на стойност {x.Total} лв." +
+                $"\r\n \r\n" +
+                $"Дата на плащане: {x.ModifiedOn}",
             }).FirstOrDefault();
 
             return model;

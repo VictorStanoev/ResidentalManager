@@ -49,7 +49,7 @@
                     {
                         <td>
                             <div class="button-holder ">
-                                <a href="/Taxes/Pay?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-success">Pay</a>
+                                <a href="/Taxes/Pay?id=@tax.Id&realEstateId=@ViewBag.realEstateId&pageNum=@Model.PageNumber" class="btn btn-sm text-uppercase btn-success">Pay</a>
                             </div>
                         </td>
                     }
@@ -57,21 +57,21 @@
                     {
                         <td>
                             <div class="button-holder">
-                                <a href="/Taxes/ReversePayment?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-danger">Rev.</a>
+                                <a href="/Taxes/ReversePayment?id=@tax.Id&realEstateId=@ViewBag.realEstateId&pageNum=@Model.PageNumber" class="btn btn-sm text-uppercase btn-danger">Rev.</a>
                             </div>
                         </td>
                     }
 
                     <td>
                         <div class="button-holder ">
-                            <a href="/Taxes/UpdateTax?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-warning">Update</a>
+                            <a href="/Taxes/UpdateTax?id=@tax.Id&realEstateId=@ViewBag.realEstateId&pageNum=@Model.PageNumber" class="btn btn-sm text-uppercase btn-warning">Update</a>
                         </div>
                     </td>
                     @if (tax.IsPaid == true)
                     {
                         <td>
                             <div class="button-holder ">
-                                <a href="/Taxes/Receipt?id=@tax.Id&realEstateId=@ViewBag.realEstateId" class="btn btn-sm text-uppercase btn-info">Send</a>
+                                <a href="/Taxes/Receipt?id=@tax.Id&realEstateId=@ViewBag.realEstateId&pageNum=@Model.PageNumber" class="btn btn-sm text-uppercase btn-info">Send</a>
                             </div>
                         </td>
                     }

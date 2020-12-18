@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label asp-for="@Model.Content"></label>
-            <textarea asp-for="@Model.Content" class="form-control"></textarea>
+            <textarea rows="4" asp-for="@Model.Content" class="form-control"></textarea>
             <span asp-validation-for="@Model.Content" class="text-danger"></span>
         </div>
        
@@ -34,7 +34,7 @@
 
     <div class="form-row">
         <div>
-            <a href="/Taxes/All?RealEstateId=@ViewBag.realEstateId" class="btn btn-primary">Go Back</a>
+            <a href="/Taxes/All?RealEstateId=@ViewBag.realEstateId&pageNum=@ViewBag.pageNum" class="btn btn-primary">Go Back</a>
 
             <input type="submit" class="btn btn-primary" value="Send Email" />
         </div>

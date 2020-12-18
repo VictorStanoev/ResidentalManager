@@ -1,20 +1,23 @@
 ﻿@model ResidentalManager.Web.ViewComponents.ResidentsInfo.ResidentsInfoViewModel
 
 <section>
-    
+
     <h6>Total Residents: @Model.TotalResidents</h6>
-    <h6>Total Pets: @Model.TotalPets</h6>
-    <div class="text-uppercase">
-        Gender
+    <div class="text-uppercase">Total Pets: @Model.TotalPets</div>
+    <div></div>
+    <div class="text-uppercase text-danger">
+        Residents by Gender
     </div>
-    <h6>Males: @Model.Males</h6>
-    <h6>Females: @Model.Females</h6>
-    <div>
-        Ages
+    <div>Males: @Model.Males</div>
+    <div>Females: @Model.Females</div>
+    <div></div>
+    <hr />
+    <div class="text-uppercase text-danger">
+        Residents by Age
     </div>
-    <h6>Below age 18: @Model.Youth</h6>
-    <h6>Between 18 and 65: @Model.MiddleAged</h6>
-    <h6>Above 65: @Model.Old</h6>
+    <h6>Under 18 years: @Model.Youth</h6>
+    <h6>Between 18 and 65 years: @Model.MiddleAged</h6>
+    <h6>Above 65 years: @Model.Old</h6>
     <div></div>
     
 </section>

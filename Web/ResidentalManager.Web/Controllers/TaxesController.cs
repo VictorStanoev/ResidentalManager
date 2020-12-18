@@ -43,30 +43,31 @@
             return this.RedirectToAction("All", new { realEstateId });
         }
 
-        public async Task<IActionResult> Pay(int id, int realEstateId)
+        public async Task<IActionResult> Pay(int id, int realEstateId, int pageNum)
         {
             this.ViewBag.realEstateId = realEstateId;
             await this.taxesService.Pay(id);
-            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Taxes", new { realEstateId, pageNum });
         }
 
-        public async Task<IActionResult> ReversePayment(int id, int realEstateId)
+        public async Task<IActionResult> ReversePayment(int id, int realEstateId, int pageNum)
         {
             this.ViewBag.realEstateId = realEstateId;
             await this.taxesService.ReversePayment(id);
-            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Taxes", new { realEstateId, pageNum });
         }
 
-        public async Task<IActionResult> UpdateTax(int id, int realEstateId)
+        public async Task<IActionResult> UpdateTax(int id, int realEstateId, int pageNum)
         {
             this.ViewBag.realEstateId = realEstateId;
             await this.taxesService.UpdateTax(id);
-            return this.Redirect($"/Taxes/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Taxes", new { realEstateId, pageNum });
         }
 
-        public IActionResult Receipt(int id, int realEstateId)
+        public IActionResult Receipt(int id, int realEstateId, int pageNum)
         {
             this.ViewBag.realEstateId = realEstateId;
+            this.ViewBag.pageNum = pageNum;
             var model = this.taxesService.GetReceiptInfo(id);
             return this.View(model);
         }

@@ -1,4 +1,5 @@
 ﻿@using ResidentalManager.Common
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,12 +8,13 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
-    <link href="~/css/Chart.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <link rel="stylesheet" href="~/css/custom.css">
+
 </head>
-<body>
+<body class="custom-background">
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 ">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -22,12 +24,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (this.User.IsInRole(GlobalConstants.UserRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="User" asp-controller="Report" asp-action="Index" title="Report">Report</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="User" asp-controller="UserTaxes" asp-action="Test" title="UserTaxes">UserTaxes</a>
+                            </li>
+                        }
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Estates" asp-action="All">RealEstates</a>
                         </li>
+                        }
                         @RenderSection("PropertyLinks", false)
 
                     </ul>
@@ -36,10 +51,14 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container ">
+        
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
+
             @this.RenderBody()
+
+
         </main>
     </div>
 
@@ -57,5 +76,5 @@
     <script src="~/js/Chart.bundle.min.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     @await this.RenderSectionAsync("Scripts", required: false)
-    </body>
+</body>
 </html>

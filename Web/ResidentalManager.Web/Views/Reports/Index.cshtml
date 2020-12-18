@@ -18,85 +18,9 @@
         <div>
             @await Component.InvokeAsync("YearTaxes", new { realEstateId = ViewBag.realEstateId })
         </div>
-    
-
-    @*<div class="table">
-            <div class="col-6 ">
-                <div id="chartContainer"></div>
-            </div>
-            <div class="col-6 ">
-                <div id="chartContainer2"></div>
-            </div>
-
-        </div>*@
-
-
+  
 
 </section>
-
-
-<section>
-</section>
-
-
-<script type="text/javascript">
-    window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer2",
-            {
-                title: {
-                    text: "Residents by gender"
-                },
-                legend: {
-                    maxWidth: 350,
-                    itemWidth: 120
-                },
-                data: [
-                    {
-                        type: "pie",
-                        showInLegend: true,
-                        legendText: "{indexLabel}",
-                        dataPoints: [
-                            { y: 4181563, indexLabel: "Male" },
-                            { y: 2175498, indexLabel: "Female" },
-                            { y: 3125844, indexLabel: "Unknown" },
-                        ]
-                    }
-                ]
-            });
-
-        var chart2 = new CanvasJS.Chart("chartContainer", {
-            theme: "light1",
-            animationEnabled: true,
-            title: {
-                text: "Simple Column Chart in ASP.NET MVC"
-            },
-            subtitles: [
-                { text: "Try Resizing the Browser" }
-            ],
-            data: [
-                {
-                    type: "column", //change type to bar, line, area, pie, etc
-                    dataPoints: [
-                        { x: 10, y: 71, indexLabel: "Test" },
-                        { x: 20, y: 55 },
-                        { x: 30, y: 50 },
-                        { x: 40, y: 65 },
-                        { x: 50, y: 65 },
-                        { x: 60, y: 65 },
-                        { x: 70, y: 65 },
-                        { x: 80, y: 65 },
-                        { x: 90, y: 65 },
-                        { x: 100, y: 65 },
-
-                    ]
-                }
-            ]
-        });
-        chart.render();
-        chart2.render();
-    }
-</script>
-
 
 
 @section PropertyLinks {

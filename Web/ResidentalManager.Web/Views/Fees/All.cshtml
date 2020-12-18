@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Fees.AllFeesViewModel>
 <section class="py-4">
-    <h1 class="text-uppercase text-center">Fees</h1>
+    <h1 class="text-uppercase text-center">Monthly Fees</h1>
 
     <div class="button-holder">
         <a href="/Fees/Create?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
     </div>
     <hr />
     <div class="container">
-        <table class="table">
+        <table class="table bg-transparent table-striped">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Name</th>

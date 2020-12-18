@@ -1,5 +1,6 @@
 ﻿namespace ResidentalManager.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Pets;
