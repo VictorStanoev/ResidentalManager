@@ -1,0 +1,26 @@
+﻿@using ResidentalManager.Common
+@{
+    this.ViewData["Title"] = "Property";
+}
+
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            @await Component.InvokeAsync("YearFinancial", new { realEstateId = ViewBag.realEstateId })
+        </div>
+        <hr />
+        <div class="col">
+            @await Component.InvokeAsync("ResidentsInfo", new { realEstateId = ViewBag.realEstateId })
+        </div>
+    </div>
+        <hr />
+        <div>
+            @await Component.InvokeAsync("YearTaxes", new { realEstateId = ViewBag.realEstateId })
+        </div>
+  
+
+</section>
+
+
+

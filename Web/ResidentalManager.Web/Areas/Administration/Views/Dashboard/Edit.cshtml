@@ -1,0 +1,48 @@
+﻿@model ResidentalManager.Web.ViewModels.Administration.Dashboard.UsersViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1 class="col-md-6 offset-md-3">Update User</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.UserName"></label>
+            <input asp-for="@Model.UserName" class="form-control">
+            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Email"></label>
+            <input asp-for="@Model.Email" class="form-control">
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.RealEstate" class="col-md-12"></label>
+            <div class="form-group">
+                <select asp-for="@Model.RealEstateId" class="form-control"
+                        asp-items="@(new SelectList(Model.RealEstate,"Id","Name"))"></select>
+
+                <span asp-validation-for="@Model.RealEstate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="@Model.Property" class="col-md-12"></label>
+            <div class="form-group">
+                <select asp-for="@Model.PropertyId" class="form-control "
+                        asp-items="@(new SelectList(Model.Property,"Id","Name"))"></select>
+
+                <span asp-validation-for="@Model.Property" class="text-danger"></span>
+            </div>
+        </div>
+        <input asp-for-userId="@Model.Id" type="hidden" />
+
+     </div>
+
+        <div class="form-row">
+            <div>
+                <a href="/Residents/All?propertyId=@ViewBag.propertyId&realEstateId=@ViewBag.realEstateId" class="btn btn-primary">Go Back</a>
+
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </div>
+        </div>
+</form>

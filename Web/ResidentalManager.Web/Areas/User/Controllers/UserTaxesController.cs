@@ -5,21 +5,39 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ResidentalManager.Data.Models;
+    using ResidentalManager.Services.Data;
 
     public class UserTaxesController : UserController
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ITaxesService taxesService;
 
-        public UserTaxesController(UserManager<ApplicationUser> userManager)
+        public UserTaxesController(
+            UserManager<ApplicationUser> userManager,
+            ITaxesService taxesService)
         {
             this.userManager = userManager;
+            this.taxesService = taxesService;
         }
 
-        public async Task <IActionResult> Test()
+        public async Task<IActionResult> Test()
         {
             var user = await this.userManager.GetUserAsync(this.User);
             var userID = user.Id;
             return Json(user.Id);
+        }
+
+        public async Task<IActionResult> All(int pageNum = 1)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+            var realEstateId = (int)user.RealEstateId;
+            var propertyId = (int)user.PropertyId;
+
+            this.ViewBag.realEstateId = realEstateId;
+            this.ViewBag.propertyId = propertyId;
+
+            var model = this.taxesService.GetAllPropertyTaxes(realEstateId, propertyId, pageNum);
+            return this.View(model);
         }
     }
 }

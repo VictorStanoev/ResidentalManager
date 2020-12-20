@@ -92,9 +92,54 @@
             return model;
         }
 
+
         public int GetCount(int realEstateId)
         {
             return this.taxRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
+        }
+
+
+        public TaxesListViewModel GetAllPropertyTaxes(int realEstateId, int propertyId, int pageNum)
+        {
+            var taxesOnPage = 12;
+
+            var taxes = this.taxRepository
+               .AllAsNoTracking()
+               .Where(x => x.RealEstateId == realEstateId)
+               .Where(x => x.PropertyId == propertyId)
+               .OrderByDescending(x => x.Year)
+               .ThenByDescending(x => x.Month)
+               .Skip((pageNum - 1) * taxesOnPage).Take(taxesOnPage)
+               .Select(x => new TaxViewModel()
+               {
+                   Id = x.Id,
+                   PropertyTax = x.PropertyTax,
+                   ResidentsTax = x.ResidentsTax,
+                   PetTax = x.PetTax,
+                   Total = x.Total.ToString(),
+                   IsPaid = x.IsPaid,
+                   Month = x.Month,
+                   Year = x.Year,
+                   PropertyNumber = x.Property.Number,
+               })
+               .OrderByDescending(x => x.Year)
+               .ThenByDescending(x => x.Month)
+               .AsEnumerable();
+
+            var model = new TaxesListViewModel
+            {
+                PageNumber = pageNum,
+                ItemsPerPage = taxesOnPage,
+                TaxesCount = this.GetCountPropertyTaxes(realEstateId),
+                Taxes = taxes,
+            };
+
+            return model;
+        }
+
+        public int GetCountPropertyTaxes(int propertyId)
+        {
+            return this.taxRepository.All().Where(x => x.PropertyId == propertyId).Count();
         }
 
         public TaxReceiptViewModel GetReceiptInfo(int id)

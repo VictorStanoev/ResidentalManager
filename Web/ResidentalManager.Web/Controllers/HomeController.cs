@@ -3,12 +3,18 @@
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Web.ViewModels;
 
     public class HomeController : BaseController
     {
         public IActionResult Index()
         {
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/Estates/All");
+            }
+
             return this.View();
         }
 

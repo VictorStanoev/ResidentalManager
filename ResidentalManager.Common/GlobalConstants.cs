@@ -11,5 +11,6 @@
         public const string Currency = " лв.";
 
         public const string SystemEmail = "victor.stanoev@gymrealm.com";
+
     }
 }
