@@ -27,6 +27,12 @@ namespace ResidentalManager.Data.Models
 
         public DateTime? DeletedOn { get; set; }
 
+        // Residental info
+
+        public int? RealEstateId { get; set; }
+
+        public int? PropertyId { get; set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }

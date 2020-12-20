@@ -30,18 +30,19 @@
                         </li>
                         @if (this.User.IsInRole(GlobalConstants.UserRoleName))
                         {
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="User" asp-controller="Report" asp-action="Index" title="Report">Report</a>
+                                <a class="nav-link text-dark" asp-area="User" asp-controller="UserTaxes" asp-action="Test" title="UserTaxes">MyTaxes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="User" asp-controller="UserTaxes" asp-action="Test" title="UserTaxes">UserTaxes</a>
+                                <a class="nav-link text-dark" asp-area="User" asp-controller="Report" asp-action="Index" title="Report">Report</a>
                             </li>
                         }
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Estates" asp-action="All">RealEstates</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Estates" asp-action="All">RealEstates</a>
+                            </li>
                         }
                         @RenderSection("PropertyLinks", false)
 
@@ -52,7 +53,7 @@
     </header>
 
     <div class="container ">
-        
+
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
 

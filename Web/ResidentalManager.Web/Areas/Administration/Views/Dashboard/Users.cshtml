@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Administration.Dashboard.UsersViewModel>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark text-center">
+            <tr class="text-sm-center">
+                <th>UserName</th>
+                <th>Email</th>
+                <th>RealEstate</th>
+                <th>Property</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr class="text-center">
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.RealEstateId</td>
+                    <td>@user.PropertyId</td>
+                    <td>
+                        <div class="button-holder ">
+                            <a href=" " class="btn btn-sm text-uppercase btn-warning">Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="button-holder">
+                            <a href=" " class="btn btn-sm btn-danger text-uppercase">Delete</a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
