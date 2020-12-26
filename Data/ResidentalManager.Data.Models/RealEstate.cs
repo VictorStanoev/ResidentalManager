@@ -47,6 +47,10 @@
 
         public bool Garages { get; set; }
 
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
         public virtual ICollection<Property> Properties { get; set; }
 
         public virtual ICollection<Fee> Fees { get; set; }

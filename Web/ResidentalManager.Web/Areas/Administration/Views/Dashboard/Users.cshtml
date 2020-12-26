@@ -6,8 +6,8 @@
             <tr class="text-sm-center">
                 <th>UserName</th>
                 <th>Email</th>
-                <th>RealEstate</th>
-                <th>Property</th>
+                <th>RealEstateName</th>
+                <th>PropertyNumber</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -18,8 +18,8 @@
                 <tr class="text-center">
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
-                    <td>@user.RealEstateId</td>
-                    <td>@user.PropertyId</td>
+                    <td>@user.RealEstateName</td>
+                    <td>@user.PropertyNumber</td>
                     <td>
                         <div class="button-holder ">
                             <a asp-area="Administration" asp-controller="Dashboard" asp-action="Edit" asp-route-id="@user.Id" title="EditUser" class="btn btn-sm text-uppercase btn-warning">Edit</a>

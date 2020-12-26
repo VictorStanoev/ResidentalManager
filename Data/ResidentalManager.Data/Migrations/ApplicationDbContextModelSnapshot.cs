@@ -17,7 +17,7 @@ namespace ResidentalManager.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
@@ -416,6 +416,9 @@ namespace ResidentalManager.Data.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId")
@@ -427,6 +430,8 @@ namespace ResidentalManager.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("RealEstateId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Properties");
                 });
@@ -489,7 +494,12 @@ namespace ResidentalManager.Data.Migrations
                     b.Property<string>("Town")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("RealEstates");
                 });
@@ -786,11 +796,26 @@ namespace ResidentalManager.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ResidentalManager.Data.Models.ApplicationUser", "User")
+                        .WithMany("Properties")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Company");
 
                     b.Navigation("PropertyFee");
 
                     b.Navigation("RealEstate");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ResidentalManager.Data.Models.RealEstate", b =>
+                {
+                    b.HasOne("ResidentalManager.Data.Models.ApplicationUser", "User")
+                        .WithMany("RealEstates")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ResidentalManager.Data.Models.RealEstateExpence", b =>
@@ -847,6 +872,10 @@ namespace ResidentalManager.Data.Migrations
                     b.Navigation("Claims");
 
                     b.Navigation("Logins");
+
+                    b.Navigation("Properties");
+
+                    b.Navigation("RealEstates");
 
                     b.Navigation("Roles");
                 });

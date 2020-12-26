@@ -82,6 +82,8 @@
                 Email = x.Email,
                 PropertyId = x.PropertyId,
                 RealEstateId = x.RealEstateId,
+                RealEstateName = this.realEstateRepository.All().Where(r => r.Id == x.RealEstateId).ToList().ToList().Select(r => r.Name).FirstOrDefault().ToString(),
+                PropertyNumber = this.propertiesRepository.All().Where(r => r.Id == x.PropertyId).ToList().ToList().Select(r => r.Number).FirstOrDefault().ToString(),
             }).ToList();
         }
     }

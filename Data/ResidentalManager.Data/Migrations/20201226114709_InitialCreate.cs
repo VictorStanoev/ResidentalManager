@@ -34,6 +34,8 @@ namespace ResidentalManager.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RealEstateId = table.Column<int>(type: "int", nullable: true),
+                    PropertyId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -72,35 +74,6 @@ namespace ResidentalManager.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RealEstates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Town = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostCode = table.Column<int>(type: "int", nullable: false),
-                    ResidentalArea = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StreetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StreetNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EntranceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Floors = table.Column<int>(type: "int", nullable: false),
-                    Attics = table.Column<bool>(type: "bit", nullable: false),
-                    Basements = table.Column<bool>(type: "bit", nullable: false),
-                    Elevator = table.Column<bool>(type: "bit", nullable: false),
-                    Garages = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RealEstates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,6 +201,42 @@ namespace ResidentalManager.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RealEstates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Region = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Town = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostCode = table.Column<int>(type: "int", nullable: false),
+                    ResidentalArea = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StreetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StreetNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuildingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EntranceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Floors = table.Column<int>(type: "int", nullable: false),
+                    Attics = table.Column<bool>(type: "bit", nullable: false),
+                    Basements = table.Column<bool>(type: "bit", nullable: false),
+                    Elevator = table.Column<bool>(type: "bit", nullable: false),
+                    Garages = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RealEstates", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RealEstates_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fees",
                 columns: table => new
                 {
@@ -296,6 +305,7 @@ namespace ResidentalManager.Data.Migrations
                     PropertyOwnership = table.Column<int>(type: "int", nullable: false),
                     FeeId = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -304,6 +314,12 @@ namespace ResidentalManager.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Properties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Properties_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Properties_Companies_CompanyId",
                         column: x => x.CompanyId,
@@ -532,6 +548,11 @@ namespace ResidentalManager.Data.Migrations
                 column: "RealEstateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Properties_UserId",
+                table: "Properties",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RealEstateExpences_IsDeleted",
                 table: "RealEstateExpences",
                 column: "IsDeleted");
@@ -540,6 +561,11 @@ namespace ResidentalManager.Data.Migrations
                 name: "IX_RealEstateExpences_RealEstateId",
                 table: "RealEstateExpences",
                 column: "RealEstateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RealEstates_UserId",
+                table: "RealEstates",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Residents_FeeId",
@@ -613,9 +639,6 @@ namespace ResidentalManager.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Properties");
 
             migrationBuilder.DropTable(
@@ -626,6 +649,9 @@ namespace ResidentalManager.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "RealEstates");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

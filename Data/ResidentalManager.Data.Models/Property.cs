@@ -41,6 +41,10 @@
 
         public virtual Company Company { get; set; }
 
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+
         public virtual ICollection<Resident> Residents { get; set; }
 
         public virtual ICollection<Pet> Pets { get; set; }

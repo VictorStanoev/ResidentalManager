@@ -15,6 +15,8 @@ namespace ResidentalManager.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.RealEstates = new HashSet<RealEstate>();
+            this.Properties = new HashSet<Property>();
         }
 
         // Audit info
@@ -31,7 +33,11 @@ namespace ResidentalManager.Data.Models
 
         public int? RealEstateId { get; set; }
 
+        public virtual ICollection<RealEstate> RealEstates { get; set; }
+
         public int? PropertyId { get; set; }
+
+        public virtual ICollection<Property> Properties { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
