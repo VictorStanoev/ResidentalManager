@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ResidentalManager.Data.Models;
     using ResidentalManager.Services.Data;
+    using ResidentalManager.Web.ViewModels;
 
     public class UserTaxesController : UserController
     {
@@ -30,6 +31,12 @@
         public async Task<IActionResult> All(int pageNum = 1)
         {
             var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.RealEstateId == null || user.PropertyId == null)
+            {
+                return this.View("Error");
+            }
+
             var realEstateId = (int)user.RealEstateId;
             var propertyId = (int)user.PropertyId;
 

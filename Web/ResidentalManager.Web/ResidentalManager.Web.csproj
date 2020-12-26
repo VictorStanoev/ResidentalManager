@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Views\Companies\" />
   </ItemGroup>
 
