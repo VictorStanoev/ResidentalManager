@@ -10,7 +10,7 @@
 *.userosscache
 *.sln.docstates
 
-appsettings.Development.json
+\Web\ResidentalManager.Web\appsettings.Development.json
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -363,3 +363,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Web/ResidentalManager.Web/appsettings.Development.json
