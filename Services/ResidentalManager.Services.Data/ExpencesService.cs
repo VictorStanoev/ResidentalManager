@@ -19,6 +19,7 @@
 
         public async Task CreateAsync(int realEstateId, CreateExpencesInputModel inputModel)
         {
+
             var fee = new RealEstateExpence()
             {
                 RealEstateId = realEstateId,
@@ -31,11 +32,6 @@
 
             await this.expenceRepository.AddAsync(fee);
             await this.expenceRepository.SaveChangesAsync();
-        }
-
-        public Task DeleteAsync(int id)
-        {
-            throw new System.NotImplementedException();
         }
 
         public AllExpencesViewModel Get(int id)
@@ -80,9 +76,12 @@
         private int GetCountRealEstateExpences(int realEstateId)
             => this.expenceRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
 
-        public Task Update(int id, CreateExpencesInputModel inputModel)
+        public async Task DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var expence = this.expenceRepository.All().Where(x => x.Id == id).FirstOrDefault();
+
+            this.expenceRepository.Delete(expence);
+            await this.expenceRepository.SaveChangesAsync();
         }
     }
 }

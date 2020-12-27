@@ -48,7 +48,11 @@
                     Total = prop.PropertyFee.Price + prop.Residents.Sum(x => x.ResidentFee.Price) + prop.Pets.Sum(x => x.PetFee.Price),
                 };
 
-                await this.taxRepository.AddAsync(tax);
+                if (!this.taxRepository.All()
+                    .Any(t => t.Year == tax.Year && t.Month == tax.Month && t.RealEstateId == tax.RealEstateId && t.PropertyId == tax.PropertyId))
+                {
+                    await this.taxRepository.AddAsync(tax);
+                }
             }
 
             await this.taxRepository.SaveChangesAsync();

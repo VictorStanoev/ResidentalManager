@@ -1,9 +1,39 @@
 ﻿@model ResidentalManager.Web.ViewComponents.YearFinanacial.YearFinancialViewModel
 
 <section>
-    <h5>FINANCIAL INFORMATION FOR YEAR  @DateTime.UtcNow.Year </h5>
+    <h4 class="text-uppercase text-center ">FINANCIAL INFORMATION FOR YEAR  @DateTime.UtcNow.Year </h4>
     <p></p>
-    <h6>Income from taxes: @Model.IncomeTaxes лв.</h6>
-    <h6>Expences: @Model.Expences лв.</h6>
-    <h4 class="text-dark">TOTAL: @Model.Total лв.</h4>
+    <p></p>
+    <div class="container my-4">
+        <div class="row justify-content-md-center">
+            <div class="col col-md-auto">
+                <div>Income from taxes:</div>
+                <div>Total Expences:</div>
+                <div class="font-weight-bold">TOTAL INCOME:</div>
+
+
+            </div>
+            <div class="col-md-auto">
+                <div>@Model.IncomeTaxes лв.</div>
+                <div>@Model.Expences лв.</div>
+                <div class="font-weight-bold">@Model.TotalCurrentYear лв.</div>
+
+
+            </div>
+        </div>
+        <div class="container my-lg-5 ">
+            <div class="row justify-content-md-center font-weight-bold">
+                <div class="col col-md-auto">
+                    <div>TOTAL AVAILABLE:</div>
+
+                </div>
+                <div class="col-md-auto">
+                    <div>@Model.Total лв.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
 </section>

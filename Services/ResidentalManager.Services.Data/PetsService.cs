@@ -103,5 +103,16 @@
             this.petsReporsitory.Update(pet);
             await this.petsReporsitory.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var pet = this.petsReporsitory.All().Where(x => x.Id == id).FirstOrDefault();
+
+            if (pet != null)
+            {
+                this.petsReporsitory.Delete(pet);
+                await this.petsReporsitory.SaveChangesAsync();
+            }
+        }
     }
 }

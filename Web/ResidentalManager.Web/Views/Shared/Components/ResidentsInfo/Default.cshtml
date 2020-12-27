@@ -1,23 +1,100 @@
 ﻿@model ResidentalManager.Web.ViewComponents.ResidentsInfo.ResidentsInfoViewModel
 
 <section>
-
-    <h6>Total Residents: @Model.TotalResidents</h6>
-    <div class="text-uppercase">Total Pets: @Model.TotalPets</div>
-    <div></div>
-    <div class="text-uppercase text-danger">
-        Residents by Gender
+    <div class="row">
+        <div class="col">
+            <table class="table table-borderless table-sm text-left">
+                <thead>
+                    <tr>
+                        <td class="text-uppercase text-danger">Residents</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Total Residents</td>
+                        <td>@Model.TotalResidents</td>
+                    </tr>
+                    <tr>
+                        <td>Total Pets:</td>
+                        <td>@Model.TotalPets</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div class="col">
+            <table class="table table-borderless table-sm text-left">
+                <thead>
+                    <tr>
+                        <td class="text-uppercase text-danger">Residents by Type</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Owners:</td>
+                        <td> @Model.Owners</td>
+                    </tr>
+                    <tr>
+                        <td>Connected Persons:</td>
+                        <td> @Model.ConnectedPersons</td>
+                    </tr>
+                    <tr>
+                        <td>Occupants:</td>
+                        <td> @Model.Occupants</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div>Males: @Model.Males</div>
-    <div>Females: @Model.Females</div>
-    <div></div>
     <hr />
-    <div class="text-uppercase text-danger">
-        Residents by Age
+    <div class="row">
+        <div class="col">
+            <table class="table table-borderless table-sm text-left">
+                <thead>
+                    <tr>
+                        <td class="text-uppercase text-danger">Residents by Gender</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Males</td>
+                        <td>@Model.Males</td>
+                    </tr>
+                    <tr>
+                        <td>Females:</td>
+                        <td>@Model.Females</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div class="col">
+            <table class="table table-borderless table-sm text-left">
+                <thead>
+                    <tr>
+                        <td class="text-uppercase text-danger">Residents by Age</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Under 18 years:</td>
+                        <td> @Model.Youth</td>
+                    </tr>
+                    <tr>
+                        <td>Between 18 and 65 years:</td>
+                        <td> @Model.MiddleAged</td>
+                    </tr>
+                    <tr>
+                        <td>Above 65 years:</td>
+                        <td> @Model.Old</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <h6>Under 18 years: @Model.Youth</h6>
-    <h6>Between 18 and 65 years: @Model.MiddleAged</h6>
-    <h6>Above 65 years: @Model.Old</h6>
-    <div></div>
-    
 </section>

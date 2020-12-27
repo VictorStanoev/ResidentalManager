@@ -15,5 +15,11 @@
         public string MiddleAged { get; set; }
 
         public string Old { get; set; }
+
+        public string Owners { get; set; }
+
+        public string Occupants { get; set; }
+
+        public string ConnectedPersons { get; set; }
     }
 }

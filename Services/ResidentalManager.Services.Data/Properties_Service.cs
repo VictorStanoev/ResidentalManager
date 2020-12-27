@@ -12,13 +12,19 @@
     public class Properties_Service : IProperties_Service
     {
         private readonly IDeletableEntityRepository<Property> repository;
+        private readonly IDeletableEntityRepository<Resident> residentRepo;
+        private readonly IDeletableEntityRepository<Pet> petRepo;
         private readonly IDeletableEntityRepository<Fee> feeRepository;
 
         public Properties_Service(
-            IDeletableEntityRepository<Property> repository,
+            IDeletableEntityRepository<Property> propertyRepo,
+            IDeletableEntityRepository<Resident> residentRepo,
+            IDeletableEntityRepository<Pet> petRepo,
             IDeletableEntityRepository<Fee> feeRepository)
         {
-            this.repository = repository;
+            this.repository = propertyRepo;
+            this.residentRepo = residentRepo;
+            this.petRepo = petRepo;
             this.feeRepository = feeRepository;
         }
 
@@ -43,8 +49,16 @@
         public async Task DeleteAsync(int id)
         {
             var property = this.repository.All().Where(x => x.Id == id).FirstOrDefault();
-            this.repository.Delete(property);
-            await this.repository.SaveChangesAsync();
+
+            var isResidents = this.residentRepo.All().Any(x => x.PropertyId == id);
+            var isPets = this.petRepo.All().Any(x => x.PropertyId == id);
+            var isFee = this.feeRepository.All().Any(x => x.RealEstateId == id);
+
+            if (!isResidents && !isPets && !isFee)
+            {
+                this.repository.Delete(property);
+                await this.repository.SaveChangesAsync();
+            }
         }
 
         public AllPropertiesViewModel Get(int id)

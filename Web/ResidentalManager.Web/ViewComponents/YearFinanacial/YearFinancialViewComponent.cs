@@ -23,25 +23,38 @@
 
         public IViewComponentResult Invoke(int realEstateId)
         {
-            var totalYearTaxes = this.taxRepository
+            var taxesCurrentYear = this.taxRepository
                 .All()
                 .Where(x => x.Year == DateTime.UtcNow.Year)
                 .Where(x => x.RealEstateId == realEstateId)
                 .Where(x => x.IsPaid == true)
                 .Select(x => x.Total).Sum().Value;
 
-            var totalYearExpenses = this.expenceRepository
+            var expensesCurrentYear = this.expenceRepository
                 .All()
                 .Where(x => x.Year == DateTime.UtcNow.Year)
                 .Where(x => x.RealEstateId == realEstateId)
                 .Select(x => x.Amount)
                 .Sum();
 
+            var totalTaxes = this.taxRepository
+                .All()
+                .Where(x => x.RealEstateId == realEstateId)
+                .Where(x => x.IsPaid == true)
+                .Select(x => x.Total).Sum().Value;
+
+            var totalExpences = this.expenceRepository
+                .All()
+                .Where(x => x.RealEstateId == realEstateId)
+                .Select(x => x.Amount)
+                .Sum();
+
             var model = new YearFinancialViewModel()
             {
-                IncomeTaxes = totalYearTaxes.ToString(),
-                Expences = totalYearExpenses.ToString(),
-                Total = (totalYearTaxes - totalYearExpenses).ToString(),
+                IncomeTaxes = taxesCurrentYear.ToString(),
+                Expences = expensesCurrentYear.ToString(),
+                TotalCurrentYear = (taxesCurrentYear - expensesCurrentYear).ToString(),
+                Total = (totalTaxes - totalExpences).ToString(),
             };
             return this.View(model);
         }

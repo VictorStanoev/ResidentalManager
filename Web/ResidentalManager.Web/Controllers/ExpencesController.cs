@@ -44,5 +44,12 @@
 
             return this.Redirect($"/Expences/All?realEstateId={realEstateId}");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id, int realEstateId, int pageNum)
+        {
+            await this.expencesService.DeleteAsync(id);
+            return this.RedirectToAction("All", "Expences", new { realEstateId, pageNum });
+        }
     }
 }

@@ -6,6 +6,8 @@
 
         public string Expences { get; set; }
 
+        public string TotalCurrentYear { get; set; }
+
         public string Total { get; set; }
     }
 }

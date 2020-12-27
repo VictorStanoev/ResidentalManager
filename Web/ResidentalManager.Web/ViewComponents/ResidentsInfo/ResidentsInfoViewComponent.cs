@@ -68,6 +68,21 @@
                 .Count()
                 .ToString();
 
+            var owners = residents
+                .Where(x => x.ResidentType == ResidentType.Owner)
+                .Count()
+                .ToString();
+
+            var occupants = residents
+               .Where(x => x.ResidentType == ResidentType.Occupant)
+               .Count()
+               .ToString();
+
+            var connectedPersons = residents
+               .Where(x => x.ResidentType == ResidentType.ConnectedPerson)
+               .Count()
+               .ToString();
+
             var model = new ResidentsInfoViewModel()
             {
                 TotalResidents = totalResidents,
@@ -77,6 +92,9 @@
                 Youth = below18,
                 MiddleAged = between18and65,
                 Old = above65,
+                Owners = owners,
+                Occupants = occupants,
+                ConnectedPersons = connectedPersons,
             };
 
             return this.View(model);

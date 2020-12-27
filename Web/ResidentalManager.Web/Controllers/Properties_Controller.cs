@@ -50,7 +50,7 @@
         public async Task<IActionResult> Delete(int id, int realEstateId)
         {
             await this.propertiesService.DeleteAsync(id);
-            return this.Redirect($"/Properties_/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Properties_", new { realEstateId });
         }
 
         [HttpGet]

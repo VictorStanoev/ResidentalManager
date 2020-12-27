@@ -16,5 +16,7 @@
         PetsViewModel Get(int id, int realEstateId);
 
         Task Update(int id, PetsInputModel model);
+
+        Task DeleteAsync(int id);
     }
 }

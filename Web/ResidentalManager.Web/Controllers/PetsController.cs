@@ -51,9 +51,8 @@
         }
 
         [HttpGet]
-        public IActionResult Update(int id, int propertyId, int realEstateId)
+        public IActionResult Update(int id, int realEstateId)
         {
-            this.ViewBag.propertyId = propertyId;
             this.ViewBag.realEstateId = realEstateId;
             var model = this.petService.Get(id, realEstateId);
             return this.View(model);
@@ -71,6 +70,14 @@
 
             await this.petService.Update(id, inputModel);
             return this.RedirectToAction("All", "Pets", new { inputModel.PropertyId, realEstateId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id, int realEstateId, int propertyId)
+        {
+            await this.petService.DeleteAsync(id);
+
+            return this.RedirectToAction("All", "Pets", new { realEstateId, propertyId });
         }
     }
 }

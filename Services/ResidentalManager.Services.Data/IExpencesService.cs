@@ -11,10 +11,8 @@
 
         ExpencesListViewModel GetAll(int realEstateId, int pageNum);
 
-        Task DeleteAsync(int id);
-
-        Task Update(int id, CreateExpencesInputModel inputModel);
-
         AllExpencesViewModel Get(int id);
+
+        Task DeleteAsync(int id);
     }
 }
