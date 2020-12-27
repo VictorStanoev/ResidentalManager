@@ -11,8 +11,12 @@
 
         UsersViewModel GetUser(string userId);
 
+        UsersViewModel GetUserProperty(string userId, int realEstateId);
+
         IEnumerable<UsersViewModel> GetUsers();
 
-        Task Edit(string userId, UsersInputModel model);
+        Task EditRealEstate(string userId, int realEstateId);
+
+        Task EditProperty(string userId, int propertyId);
     }
 }

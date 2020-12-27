@@ -43,10 +43,15 @@
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<AllExpencesViewModel> GetAll(int realEstateId)
+        public ExpencesListViewModel GetAll(int realEstateId, int pageNum)
         {
+            var expencesOnPage = 12;
+
             var expences = this.expenceRepository.AllAsNoTracking()
                 .Where(x => x.RealEstateId == realEstateId)
+                 .OrderByDescending(x => x.Year)
+                .ThenByDescending(x => x.Month)
+                .Skip((pageNum - 1) * expencesOnPage).Take(expencesOnPage)
                 .Select(x => new AllExpencesViewModel
                 {
                    Month = x.Month,
@@ -61,8 +66,19 @@
                 .ThenByDescending(x => x.Month)
                 .AsEnumerable();
 
-            return expences;
+            var model = new ExpencesListViewModel
+            {
+                PageNumber = pageNum,
+                ItemsPerPage = expencesOnPage,
+                ExpencesCount = this.GetCountRealEstateExpences(realEstateId),
+                Expences = expences,
+            };
+
+            return model;
         }
+
+        private int GetCountRealEstateExpences(int realEstateId)
+            => this.expenceRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
 
         public Task Update(int id, CreateExpencesInputModel inputModel)
         {

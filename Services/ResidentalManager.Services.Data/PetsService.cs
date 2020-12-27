@@ -22,10 +22,11 @@
             this.feeRepository = feeRepository;
         }
 
-        public PetsInputModel AddFeeDropDown()
+        public PetsInputModel AddFeeDropDown(int realEstateId)
         {
             var model = new PetsInputModel();
             var feeCollection = this.feeRepository.AllAsNoTracking()
+                .Where(x => x.RealEstateId == realEstateId)
                 .Select(x => new FeeDropDown
                 {
                     Id = x.Id,
@@ -65,6 +66,42 @@
             }).AsEnumerable();
 
             return pets;
+        }
+
+        public PetsViewModel Get(int id, int realEstateId)
+        {
+            var feeCollection = this.feeRepository.AllAsNoTracking()
+                .Where(x => x.RealEstateId == realEstateId)
+                .Select(x => new FeeDropDown
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                }).ToList();
+
+            var petModel = this.petsReporsitory.All()
+                .Where(x => x.Id == id)
+                .Select(x => new PetsViewModel
+                {
+                    Breed = x.Breed,
+                    Comment = x.Comment,
+                    FeeId = x.FeeId,
+                    PropertyId = x.PropertyId,
+                    Id = x.Id,
+                    Fee = feeCollection,
+                }).FirstOrDefault();
+
+            return petModel;
+        }
+
+        public async Task Update(int id, PetsInputModel model)
+        {
+            var pet = this.petsReporsitory.All().Where(x => x.Id == id).FirstOrDefault();
+            pet.Breed = model.Breed;
+            pet.Comment = model.Comment;
+            pet.FeeId = model.FeeId;
+
+            this.petsReporsitory.Update(pet);
+            await this.petsReporsitory.SaveChangesAsync();
         }
     }
 }

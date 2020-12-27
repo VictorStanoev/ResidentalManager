@@ -16,10 +16,10 @@
         }
 
         [HttpGet]
-        public IActionResult All(int realEstateId)
+        public IActionResult All(int realEstateId, int pageNum = 1)
         {
             this.ViewBag.realEstateId = realEstateId;
-            var model = this.expencesService.GetAll(realEstateId);
+            var model = this.expencesService.GetAll(realEstateId, pageNum);
             return this.View(model);
         }
 

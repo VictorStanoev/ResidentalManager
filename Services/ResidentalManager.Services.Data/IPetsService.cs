@@ -9,8 +9,12 @@
     {
         Task CreateAsync(PetsInputModel inputModel);
 
-        PetsInputModel AddFeeDropDown();
+        PetsInputModel AddFeeDropDown(int realEstateId);
 
         IEnumerable<PetsViewModel> GetAll(int propertyId);
+
+        PetsViewModel Get(int id, int realEstateId);
+
+        Task Update(int id, PetsInputModel model);
     }
 }

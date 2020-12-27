@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Fees.AllFeesViewModel>
+﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Fees.FeesViewModel>
 <section class="py-4">
     <h1 class="text-uppercase text-center">Monthly Fees</h1>
 
@@ -46,8 +46,8 @@
 </section>
 
 @section PropertyLinks {
-    <li class="nav-item">
-        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    <li class="nav nav-pills">
+        <a class="nav-link text-info border" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>

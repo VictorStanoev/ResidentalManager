@@ -1,6 +1,6 @@
 ﻿namespace ResidentalManager.Web.ViewModels.Fees
 {
-    public class AllFeesViewModel
+    public class FeesViewModel
     {
         public int Id { get; set; }
 

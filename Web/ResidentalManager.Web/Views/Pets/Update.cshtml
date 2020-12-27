@@ -1,1 +1,64 @@
-﻿
+﻿@model ResidentalManager.Web.ViewModels.Pets.PetsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h1 class="text-center">Add Pet</h1>
+
+<form method="post" class="col-md-6 offset-md-3">
+    <div asp-validation-summary="All"></div>
+
+    <div class="col-md-6">
+        <label asp-for="@Model.Breed"></label>
+        <input asp-for="@Model.Breed" class="form-control">
+        <span asp-validation-for="@Model.Breed" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="@Model.Comment"></label>
+        <textarea asp-for="@Model.Comment" class="form-control"></textarea>
+        <span asp-validation-for="@Model.Comment" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="@Model.Fee" class="col-md-12"></label>
+        <div class="form-group">
+            <select asp-for="@Model.FeeId" class="form-control"
+                    asp-items="@(new SelectList(Model.Fee,"Id","Name"))"></select>
+
+            <span asp-validation-for="@Model.Fee" class="text-danger"></span>
+        </div>
+
+    </div>
+
+
+
+    <div>
+        <input asp-for="@Model.PropertyId" type="hidden" />
+    </div>
+
+
+
+    <div class="form-row">
+        <div>
+            <a asp-action="All" asp-controller="Properties_" asp-route-realEstateId="@ViewBag.realEstateId" class="btn btn-primary">Go Back</a>
+
+            <input type="submit" class="btn btn-primary" value="Update" />
+        </div>
+    </div>
+</form>
+
+@section PropertyLinks {
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
+    </li>
+    <li class="nav nav-pills">
+        <a class="nav-link text-info border" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
+    </li>
+}

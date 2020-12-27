@@ -20,7 +20,7 @@
         {
             this.ViewBag.realEstateId = realEstateId;
             this.ViewBag.propertyId = propertyId;
-            var model = this.petService.AddFeeDropDown();
+            var model = this.petService.AddFeeDropDown(realEstateId);
             return this.View(model);
         }
 
@@ -32,7 +32,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                var model = this.petService.AddFeeDropDown();
+                var model = this.petService.AddFeeDropDown(realEstateId);
                 return this.View(model);
             }
 
@@ -48,6 +48,29 @@
 
             var model = this.petService.GetAll(propertyId);
             return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id, int propertyId, int realEstateId)
+        {
+            this.ViewBag.propertyId = propertyId;
+            this.ViewBag.realEstateId = realEstateId;
+            var model = this.petService.Get(id, realEstateId);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(int id, int realEstateId, PetsInputModel inputModel)
+        {
+            this.ViewBag.realEstateId = realEstateId;
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.petService.Get(id, realEstateId);
+                return this.View(model);
+            }
+
+            await this.petService.Update(id, inputModel);
+            return this.RedirectToAction("All", "Pets", new { inputModel.PropertyId, realEstateId });
         }
     }
 }

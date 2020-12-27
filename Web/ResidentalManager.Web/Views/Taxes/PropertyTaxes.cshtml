@@ -1,53 +1,51 @@
-﻿@model ResidentalManager.Web.ViewModels.Expences.ExpencesListViewModel
-@{ ViewData["Title"] = "Expences";}
+﻿@model ResidentalManager.Web.ViewModels.Taxes.TaxesListViewModel
+@{ ViewData["Title"] = "PropertyTaxes";}
 <section class="py-4">
-    <h1 class="text-uppercase text-center">Expences</h1>
-
-    <div class="button-holder">
-        <a href="/Expences/Create?realEstateId=@ViewBag.realEstateId" class="btn btn-primary text-uppercase">Create</a>
-    </div>
+    <h1 class="text-uppercase text-center">Property Taxes</h1>
+    
     <hr />
 
     <div class="container">
 
         <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Year</th>
-                    <th scope="col">Month</th>
-                    <th scope="col">Bill</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+            <thead class="thead-dark text-sm-center">
+                <tr class="text-sm-center">
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Number</th>
+                    <th>PropertyTax</th>
+                    <th>ResidentsTax</th>
+                    <th>PetTax</th>
+                    <th>Total</th>
+                    <th>Payed</th>
+                   
                 </tr>
             </thead>
             <tbody>
-                @foreach (var expence in Model.Expences)
+
+                @foreach (var tax in Model.Taxes)
                 {
-                    <tr>
-                        <th scope="row">@expence.Year</th>
-                        <td>@expence.Month</td>
-                        <td>@expence.ExpenceType</td>
-                        <td>@expence.Amount лв.</td>
-                        <td>@expence.Description</td>
+                    <tr class="text-sm-center">
+                        <td>@tax.Year</td>
+                        <td>@tax.Month</td>
+                        <td class="text-xl-center">@tax.PropertyNumber</td>
+                        <td>@tax.PropertyTax лв.</td>
+                        <td>@tax.ResidentsTax лв.</td>
+                        <td>@tax.PetTax лв.</td>
+                        <td class="font-weight-bold">@tax.Total лв.</td>
                         <td>
-                            <div class="button-holder">
-                                <a href="/Expences/Update?id=@expence.Id&realEstateId=@expence.RealEstateId" class="btn btn-warning btn-sm text-uppercase">Edit</a>
+                            <div class="checkbox-inline">
+                                <input asp-for="@tax.IsPaid" class="form-check-input">
                             </div>
                         </td>
-                        <td>
-                            <div class="button-holder">
-                                <a href="/Expences/Delete?id=@expence.Id&realEstateId=@expence.RealEstateId" class="btn btn-danger btn-sm text-uppercase">Delete</a>
-                            </div>
-                        </td>
+                       
 
                     </tr>
                 }
+
             </tbody>
         </table>
     </div>
-
     <hr />
     <nav aria-label="...">
         <ul class="pagination justify-content-center">
@@ -79,23 +77,23 @@
             </li>
         </ul>
     </nav>
-
 </section>
 
 @section PropertyLinks {
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Fees/All?realEstateId=@ViewBag.realEstateId">Fees</a>
     </li>
+    <li class="nav nav-pills">
+        <a class="nav-link text-info border" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+    </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" href="/Properties_/All?realEstateId=@ViewBag.realEstateId">Properties</a>
+        <a class="nav-link text-dark" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
     </li>
     <li class="nav nav-pills">
-        <a class="nav-link text-info border" href="/Expences/All?realEstateId=@ViewBag.realEstateId">Expences</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link text-dark" href="/Taxes/All?realEstateId=@ViewBag.realEstateId">Taxes</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" href="/Reports/Index?realEstateId=@ViewBag.realEstateId">Reports</a>
     </li>
 }
+

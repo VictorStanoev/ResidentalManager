@@ -9,12 +9,12 @@
     {
         Task CreateAsync(CreateFeesInputModel inputModel);
 
-        IEnumerable<AllFeesViewModel> GetAll(int realEstateId);
+        IEnumerable<FeesViewModel> GetAll(int realEstateId);
 
         Task DeleteAsync(int id);
 
         void Update(int id, CreateFeesInputModel inputModel);
 
-        AllFeesViewModel Get(int id);
+        FeesViewModel Get(int id);
     }
 }

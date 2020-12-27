@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using ResidentalManager.Common;
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
     using ResidentalManager.Web.ViewModels.Administration.Dashboard;
@@ -38,11 +38,10 @@
             }
         }
 
-        public async Task Edit(string userId, UsersInputModel model)
+        public async Task EditRealEstate(string userId, int realEstateId)
         {
             var user = this.usersRepository.All().Where(x => x.Id == userId).ToList().FirstOrDefault();
-            user.PropertyId = model.PropertyId;
-            user.RealEstateId = model.RealEstateId;
+            user.RealEstateId = realEstateId;
 
             this.usersRepository.Update(user);
             await this.usersRepository.SaveChangesAsync();
@@ -50,12 +49,6 @@
 
         public UsersViewModel GetUser(string userId)
         {
-            var properties = this.propertiesRepository.All().Select(x => new PropertyDropDown
-            {
-                Name = x.Number.ToString(),
-                Id = x.Id,
-            }).ToList();
-
             var realEstates = this.realEstateRepository.All().Select(x => new RealEstateDropDown
             {
                 Name = x.Name,
@@ -69,21 +62,52 @@
                 RealEstate = realEstates,
                 RealEstateId = x.RealEstateId,
                 PropertyId = x.PropertyId,
+            }).ToList().FirstOrDefault();
+        }
+
+        public UsersViewModel GetUserProperty(string userId, int realEstateId)
+        {
+            var properties = this.propertiesRepository.All().Where(x => x.RealEstateId == realEstateId).Select(x => new PropertyDropDown
+            {
+                Name = x.Number.ToString(),
+                Id = x.Id,
+            }).ToList();
+
+            var realEstateName = this.realEstateRepository.All().Where(x => x.Id == realEstateId).Select(x => x.Name).FirstOrDefault().ToString();
+
+            return this.usersRepository.All().Where(x => x.Id == userId).Select(x => new UsersViewModel
+            {
+                UserName = x.UserName,
+                Email = x.Email,
+                RealEstateId = x.RealEstateId,
+                RealEstateName = realEstateName,
+                PropertyId = x.PropertyId,
                 Property = properties,
             }).ToList().FirstOrDefault();
         }
 
+        public async Task EditProperty(string userId, int propertyId)
+        {
+            var user = this.usersRepository.All().Where(x => x.Id == userId).ToList().FirstOrDefault();
+            user.PropertyId = propertyId;
+
+            this.usersRepository.Update(user);
+            await this.usersRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<UsersViewModel> GetUsers()
         {
-            return this.usersRepository.All().Select(x => new UsersViewModel
+            return this.usersRepository.All()
+                .Where(x => x.UserName != GlobalConstants.AdminUserName)
+                .Select(x => new UsersViewModel
             {
                 Id = x.Id,
                 UserName = x.UserName,
                 Email = x.Email,
                 PropertyId = x.PropertyId,
                 RealEstateId = x.RealEstateId,
-                RealEstateName = this.realEstateRepository.All().Where(r => r.Id == x.RealEstateId).ToList().ToList().Select(r => r.Name).FirstOrDefault().ToString(),
-                PropertyNumber = this.propertiesRepository.All().Where(r => r.Id == x.PropertyId).ToList().ToList().Select(r => r.Number).FirstOrDefault().ToString(),
+                RealEstateName = this.realEstateRepository.All().Any(r => r.Id == x.RealEstateId) ? this.realEstateRepository.All().Where(r => r.Id == x.RealEstateId).ToList().ToList().Select(r => r.Name).FirstOrDefault().ToString() : "not set",
+                PropertyNumber = this.propertiesRepository.All().Any(r => r.Id == x.PropertyId) ? this.propertiesRepository.All().Where(r => r.Id == x.PropertyId).ToList().ToList().Select(r => r.Number).FirstOrDefault().ToString() : "not set",
             }).ToList();
         }
     }

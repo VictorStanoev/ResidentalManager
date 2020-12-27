@@ -45,7 +45,7 @@
                     PropertyTax = prop.PropertyFee.Price,
                     ResidentsTax = prop.Residents.Sum(x => x.ResidentFee.Price),
                     PetTax = prop.Pets.Sum(x => x.PetFee.Price),
-                    Total = prop.PropertyFee.Price + prop.Residents.Sum(x => x.ResidentFee.Price),
+                    Total = prop.PropertyFee.Price + prop.Residents.Sum(x => x.ResidentFee.Price) + prop.Pets.Sum(x => x.PetFee.Price),
                 };
 
                 await this.taxRepository.AddAsync(tax);
@@ -92,12 +92,10 @@
             return model;
         }
 
-
         public int GetCount(int realEstateId)
         {
             return this.taxRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
         }
-
 
         public TaxesListViewModel GetAllPropertyTaxes(int realEstateId, int propertyId, int pageNum)
         {

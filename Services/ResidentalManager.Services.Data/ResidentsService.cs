@@ -87,7 +87,10 @@
                      Telephone = x.Telephone,
                      FeeId = x.FeeId,
                      PropertyId = x.PropertyId,
-                 }).FirstOrDefault();
+                 })
+                 .OrderBy(x => x.DateOfBirth)
+                 .ToList()
+                 .FirstOrDefault();
         }
 
         public IEnumerable<AllResidentsViewModel> GetAll(int propertyId)
@@ -114,7 +117,9 @@
                     Telephone = x.Telephone,
                     FeeId = x.FeeId,
                     PropertyId = x.PropertyId,
-                }).ToList().AsEnumerable();
+                })
+                .OrderBy(x => x.DateOfBirth)
+                .ToList();
 
             return residents;
         }
@@ -143,7 +148,9 @@
                     Telephone = x.Telephone,
                     FeeId = x.FeeId,
                     PropertyId = x.PropertyId,
-                }).ToList().AsEnumerable();
+                })
+                .OrderBy(x => x.DateOfBirth)
+                .ToList();
 
             return residents;
         }

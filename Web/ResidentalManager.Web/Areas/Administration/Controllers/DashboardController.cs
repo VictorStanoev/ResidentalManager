@@ -38,16 +38,30 @@
             return this.RedirectToAction("Users", "Dashboard");
         }
 
-        public IActionResult Edit(string id)
+        public IActionResult EditRealEstate(string id)
         {
             var model = this.usersService.GetUser(id);
             return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, UsersInputModel model)
+        public async Task<IActionResult> EditRealEstate(string id, int realEstateId)
         {
-            await this.usersService.Edit(id, model);
+            await this.usersService.EditRealEstate(id, realEstateId);
+            return this.RedirectToAction("EditProperty", "Dashboard", new { id, realEstateId });
+        }
+
+        [HttpGet]
+        public IActionResult EditProperty(string id, int realEstateId)
+        {
+            var model = this.usersService.GetUserProperty(id, realEstateId);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditProperty(string id, int propertyId, int realEstateId)
+        {
+            await this.usersService.EditProperty(id, propertyId);
             return this.RedirectToAction("Users", "Dashboard");
         }
     }

@@ -27,6 +27,14 @@
             return this.View(model);
         }
 
+        public IActionResult PropertyTaxes(int realEstateId, int propertyId, int pageNum = 1)
+        {
+            this.ViewBag.realEstateId = realEstateId;
+            var model = this.taxesService.GetAllPropertyTaxes(realEstateId, propertyId, pageNum);
+            return this.View(model);
+        }
+
+
         public IActionResult Generate(int realEstateId)
         {
             this.ViewBag.realEstateId = realEstateId;

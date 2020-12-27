@@ -38,11 +38,11 @@
             await this.repository.SaveChangesAsync();
         }
 
-        public AllFeesViewModel Get(int id)
+        public FeesViewModel Get(int id)
         {
             return this.repository.All()
                 .Where(x => x.Id == id)
-                .Select(x => new AllFeesViewModel
+                .Select(x => new FeesViewModel
             {
                 Name = x.Name,
                 Price = x.Price,
@@ -50,11 +50,11 @@
             }).FirstOrDefault();
         }
 
-        public IEnumerable<AllFeesViewModel> GetAll(int realEstateId)
+        public IEnumerable<FeesViewModel> GetAll(int realEstateId)
         {
             var fees = this.repository.AllAsNoTracking()
                 .Where(x => x.RealEstateId == realEstateId)
-                .Select(x => new AllFeesViewModel
+                .Select(x => new FeesViewModel
             {
                 Name = x.Name,
                 Price = x.Price,

@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Administration.Dashboard.UsersViewModel>
 
-<div class="container">
-    <table class="table">
-        <thead class="thead-dark text-center">
-            <tr class="text-sm-center">
-                <th>UserName</th>
-                <th>Email</th>
-                <th>RealEstateName</th>
-                <th>PropertyNumber</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr class="text-center">
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>@user.RealEstateName</td>
-                    <td>@user.PropertyNumber</td>
-                    <td>
-                        <div class="button-holder ">
-                            <a asp-area="Administration" asp-controller="Dashboard" asp-action="Edit" asp-route-id="@user.Id" title="EditUser" class="btn btn-sm text-uppercase btn-warning">Edit</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="button-holder">
-                            <a asp-area="Administration" asp-controller="Dashboard" asp-action="Delete" asp-route-id="@user.Id" title="DeleteUser" class="btn btn-sm btn-danger text-uppercase">Delete</a>
-                        </div>
-                    </td>
+    <section class="py-4">
+        <div class="container">
+            <table class="table table-light table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>UserName</th>
+                        <th>Email</th>
+                        <th>RealEstateName</th>
+                        <th>PropertyNumber</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.RealEstateName</td>
+                            <td>@user.PropertyNumber</td>
+                            <td>
+                                <div class="button-holder ">
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="EditRealEstate" asp-route-id="@user.Id" title="EditUser" class="btn btn-sm text-uppercase btn-warning">Edit</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-holder">
+                                    <a asp-area="Administration" asp-controller="Dashboard" asp-action="Delete" asp-route-id="@user.Id" title="DeleteUser" class="btn btn-sm btn-danger text-uppercase">Delete</a>
+                                </div>
+                            </td>
 
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
