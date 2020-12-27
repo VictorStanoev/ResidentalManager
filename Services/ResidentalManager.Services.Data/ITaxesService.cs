@@ -1,7 +1,8 @@
 ﻿namespace ResidentalManager.Services.Data
 {
-    using ResidentalManager.Web.ViewModels.Taxes;
     using System.Threading.Tasks;
+
+    using ResidentalManager.Web.ViewModels.Taxes;
 
     public interface ITaxesService
     {

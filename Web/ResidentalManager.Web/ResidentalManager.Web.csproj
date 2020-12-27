@@ -45,10 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Companies\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="wwwroot\img\building.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

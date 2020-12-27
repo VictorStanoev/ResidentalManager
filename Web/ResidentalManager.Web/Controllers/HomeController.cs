@@ -12,7 +12,7 @@
         {
             if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return this.Redirect("/Estates/All");
+                return this.RedirectToAction("All", "Estates");
             }
 
             return this.View();

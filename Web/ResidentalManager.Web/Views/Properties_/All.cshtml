@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<ResidentalManager.Web.ViewModels.Properties_.AllPropertiesViewModel>
-@{
-    ViewBag.Title = "Properties";
-}
+@{ ViewData["Title"] = "Properties";}
 
 <section class="py-4">
     <h1 class="text-uppercase text-center">Properties</h1>
@@ -52,7 +50,7 @@
                             </td>
                             <td>
                                 <div class="button-holder">
-                                    <a asp-controller="Taxes" asp-action="PropertyTaxes" asp-route-propertyId="@prop.Id" asp-route-realEstateId="@prop.RealEstateId"  class="btn btn-outline-success btn-sm text-uppercase">View</a>
+                                    <a asp-controller="Taxes" asp-action="PropertyTaxes" asp-route-propertyId="@prop.Id" asp-route-realEstateId="@prop.RealEstateId" class="btn btn-outline-success btn-sm text-uppercase">View</a>
                                 </div>
                             </td>
                             <td>

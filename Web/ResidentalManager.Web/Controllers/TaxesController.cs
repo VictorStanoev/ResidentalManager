@@ -2,13 +2,14 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Services.Messaging;
     using ResidentalManager.Web.ViewModels.Taxes;
 
-    using ResidentalManager.Common;
-
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class TaxesController : BaseController
     {
         private readonly ITaxesService taxesService;
@@ -33,7 +34,6 @@
             var model = this.taxesService.GetAllPropertyTaxes(realEstateId, propertyId, pageNum);
             return this.View(model);
         }
-
 
         public IActionResult Generate(int realEstateId)
         {

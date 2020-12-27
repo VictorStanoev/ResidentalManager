@@ -99,6 +99,8 @@
         {
             return this.usersRepository.All()
                 .Where(x => x.UserName != GlobalConstants.AdminUserName)
+                .OrderByDescending(x => x.CreatedOn)
+                .ToList()
                 .Select(x => new UsersViewModel
             {
                 Id = x.Id,
@@ -108,7 +110,8 @@
                 RealEstateId = x.RealEstateId,
                 RealEstateName = this.realEstateRepository.All().Any(r => r.Id == x.RealEstateId) ? this.realEstateRepository.All().Where(r => r.Id == x.RealEstateId).ToList().ToList().Select(r => r.Name).FirstOrDefault().ToString() : "not set",
                 PropertyNumber = this.propertiesRepository.All().Any(r => r.Id == x.PropertyId) ? this.propertiesRepository.All().Where(r => r.Id == x.PropertyId).ToList().ToList().Select(r => r.Number).FirstOrDefault().ToString() : "not set",
-            }).ToList();
+            })
+                .ToList();
         }
     }
 }

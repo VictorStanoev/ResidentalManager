@@ -1,36 +1,37 @@
 ﻿@model ResidentalManager.Web.ViewModels.Taxes.TaxReceiptViewModel
+@{ ViewData["Title"] = "Taxes";}
 
 <h1 class="col-md-6 offset-md-3">Receipt</h1>
 
 <form method="post" class="col-md-6 offset-md-3">
     <div asp-validation-summary="All"></div>
-    
-        <div class="form-group">
-            <label asp-for="@Model.FullName"></label>
-            <input asp-for="@Model.FullName" class="form-control">
-            <span asp-validation-for="@Model.FullName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Title"></label>
-            <input asp-for="@Model.Title" class="form-control">
-            <span asp-validation-for="@Model.Title" class="text-danger"></span>
-        </div>
-        <div class="form-group ">
-            <label asp-for="@Model.Email"></label>
-            <input asp-for="@Model.Email" class="form-control">
-            <span asp-validation-for="@Model.Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="@Model.Content"></label>
-            <textarea rows="4" asp-for="@Model.Content" class="form-control"></textarea>
-            <span asp-validation-for="@Model.Content" class="text-danger"></span>
-        </div>
-       
-        <div>
-            <input asp-for="@Model.FirstName" type="hidden" />
-            <input asp-for="@Model.LastName" type="hidden" />
-        </div>
-    
+
+    <div class="form-group">
+        <label asp-for="@Model.FullName"></label>
+        <input asp-for="@Model.FullName" class="form-control">
+        <span asp-validation-for="@Model.FullName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Title"></label>
+        <input asp-for="@Model.Title" class="form-control">
+        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group ">
+        <label asp-for="@Model.Email"></label>
+        <input asp-for="@Model.Email" class="form-control">
+        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Content"></label>
+        <textarea rows="4" asp-for="@Model.Content" class="form-control"></textarea>
+        <span asp-validation-for="@Model.Content" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input asp-for="@Model.FirstName" type="hidden" />
+        <input asp-for="@Model.LastName" type="hidden" />
+    </div>
+
 
     <div class="form-row">
         <div>

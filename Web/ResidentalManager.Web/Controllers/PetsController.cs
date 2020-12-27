@@ -1,11 +1,14 @@
 ﻿namespace ResidentalManager.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using ResidentalManager.Services.Data;
-    using ResidentalManager.Web.ViewModels.Pets;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
+    using ResidentalManager.Services.Data;
+    using ResidentalManager.Web.ViewModels.Pets;
+
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class PetsController : Controller
     {
         private readonly IPetsService petService;

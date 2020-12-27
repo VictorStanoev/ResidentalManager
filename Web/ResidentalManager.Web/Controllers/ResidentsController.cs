@@ -2,10 +2,13 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Residents;
 
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class ResidentsController : Controller
     {
         private readonly IResidentsService residentsService;
@@ -52,14 +55,14 @@
             }
 
             await this.residentsService.CreateAsync(inputModel);
-            return this.Redirect($"/Residents/All?propertyId={propertyId}&realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Residents", new { propertyId, realEstateId });
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(string id, int propertyId, int realEstateId)
         {
             await this.residentsService.DeleteAsync(id);
-            return this.Redirect($"/Residents/All?propertyId={propertyId}&realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Residents", new { propertyId, realEstateId });
         }
 
         [HttpGet]
@@ -82,7 +85,7 @@
             }
 
             await this.residentsService.Update(id, inputModel);
-            return this.Redirect($"/Residents/All?propertyId={inputModel.PropertyId}&realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Residents", new { inputModel.PropertyId, realEstateId });
         }
     }
 }

@@ -2,10 +2,13 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Fees;
 
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class FeesController : Controller
     {
         private readonly IFeesService feesService;
@@ -39,7 +42,7 @@
             }
 
             await this.feesService.CreateAsync(inputModel);
-            return this.Redirect($"/Fees/All?realEstateId={inputModel.RealEstateId}");
+            return this.RedirectToAction("All", "Fees", new { inputModel.RealEstateId});
         }
 
         [HttpGet]
@@ -68,7 +71,7 @@
             }
 
             this.feesService.Update(id, inputModel);
-            return this.Redirect($"/Fees/All?realEstateId={inputModel.RealEstateId}");
+            return this.RedirectToAction("All", "Fees", new { inputModel.RealEstateId });
         }
     }
 }

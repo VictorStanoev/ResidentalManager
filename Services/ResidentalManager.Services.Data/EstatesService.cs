@@ -6,7 +6,6 @@
 
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
-    using ResidentalManager.Services.Mapping;
     using ResidentalManager.Web.ViewModels.Estates;
 
     public class EstatesService : IEstatesService

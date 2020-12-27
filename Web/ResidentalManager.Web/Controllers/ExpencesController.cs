@@ -2,10 +2,13 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ResidentalManager.Common;
     using ResidentalManager.Services.Data;
     using ResidentalManager.Web.ViewModels.Expences;
 
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class ExpencesController : BaseController
     {
         private readonly IExpencesService expencesService;
@@ -42,7 +45,7 @@
 
             await this.expencesService.CreateAsync(realEstateId, inputModel);
 
-            return this.Redirect($"/Expences/All?realEstateId={realEstateId}");
+            return this.RedirectToAction("All", "Expences", new { realEstateId });
         }
 
         [HttpGet]
