@@ -15,17 +15,20 @@
         private readonly IDeletableEntityRepository<Resident> residentRepo;
         private readonly IDeletableEntityRepository<Pet> petRepo;
         private readonly IDeletableEntityRepository<Fee> feeRepository;
+        private readonly IRepository<RealEstate> realEstateRepository;
 
         public Properties_Service(
             IDeletableEntityRepository<Property> propertyRepo,
             IDeletableEntityRepository<Resident> residentRepo,
             IDeletableEntityRepository<Pet> petRepo,
-            IDeletableEntityRepository<Fee> feeRepository)
+            IDeletableEntityRepository<Fee> feeRepository,
+            IRepository<RealEstate> realEstateRepository)
         {
             this.repository = propertyRepo;
             this.residentRepo = residentRepo;
             this.petRepo = petRepo;
             this.feeRepository = feeRepository;
+            this.realEstateRepository = realEstateRepository;
         }
 
         public async Task CreateAsync(CreatePropertiesInputModel inputModel)
@@ -79,7 +82,6 @@
                      PropertyOwnership = x.PropertyOwnership,
                      FeeId = x.FeeId,
                      PropertyType = x.PropertyType,
-                     CompanyId = x.CompanyId,
                      RealEstateId = x.RealEstateId,
                      Size = x.Size,
                      Id = x.Id,
@@ -100,7 +102,14 @@
                 Id = x.Id,
                 Name = x.Name,
             }).ToList();
+
             model.Fee = feeCollection;
+
+            model.RealEstateFloors = this.realEstateRepository
+                .All()
+                .Where(x => x.Id == realEstateId)
+                .Select(x => x.Floors)
+                .FirstOrDefault();
 
             return model;
         }
@@ -123,7 +132,6 @@
                 Floor = x.Floor,
                 Number = x.Number,
                 PercentageCommonParts = x.PercentageCommonParts,
-                CompanyId = x.CompanyId,
                 Fee = fees,
                 PropertyOwnership = x.PropertyOwnership,
                 PropertyType = x.PropertyType,

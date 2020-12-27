@@ -1,3 +1,7 @@
 ﻿.custom-background {
-    background-image: url('../img/')
+    background-image: url('../img/background.jpg')
+}
+
+.custom-background-header {
+    background-image: url('../img/background2.jpg')
 }

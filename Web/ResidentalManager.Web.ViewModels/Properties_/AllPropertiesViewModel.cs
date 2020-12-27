@@ -1,6 +1,7 @@
 ﻿namespace ResidentalManager.Web.ViewModels.Properties_
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using ResidentalManager.Data.Models.Enum;
     using ResidentalManager.Web.ViewModels.Fees;
@@ -17,15 +18,17 @@
 
         public int Size { get; set; }
 
+        [Display(Name = "% common parts")]
+        [Range(0, 100.00)]
         public decimal PercentageCommonParts { get; set; }
 
+        [Display(Name = "Choose property Type")]
         public PropertyType PropertyType { get; set; }
 
+        [Display(Name = "Choose property Ownership")]
         public PropertyOwnership PropertyOwnership { get; set; }
 
         public int FeeId { get; set; }
-
-        public int? CompanyId { get; set; }
 
         public ICollection<FeeDropDown> Fee { get; set; }
 
