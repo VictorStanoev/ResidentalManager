@@ -10,8 +10,8 @@
 *.userosscache
 *.sln.docstates
 
-\Web\ResidentalManager.Web\appsettings.Development.json
-
+appsettings.Development.json
+appsettings.Production.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
