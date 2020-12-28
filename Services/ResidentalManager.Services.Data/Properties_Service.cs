@@ -72,6 +72,11 @@
                 Name = x.Name,
             }).ToList();
 
+            var realEstateFloors = this.repository.All()
+                .Where(x => x.Id == id)
+                .Select(x => x.RealEstate.Floors)
+                .FirstOrDefault();
+
             return this.repository.AllAsNoTracking()
                  .Where(x => x.Id == id)
                  .Select(x => new AllPropertiesViewModel
@@ -86,6 +91,7 @@
                      Size = x.Size,
                      Id = x.Id,
                      Fee = fees,
+                     RealEstateFloors = realEstateFloors,
                      Residents = x.Residents.Count(),
                      Pets = x.Pets.Count(),
                  }).OrderByDescending(x => x.Number).FirstOrDefault();

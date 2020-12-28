@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using ResidentalManager.Common;
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
@@ -10,6 +11,7 @@
 
     public class UsersService : IUsersService
     {
+        private const string AdminUserName = GlobalConstants.AdminUserName;
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<Property> propertiesRepository;
         private readonly IRepository<RealEstate> realEstateRepository;
@@ -98,7 +100,7 @@
         public IEnumerable<UsersViewModel> GetUsers()
         {
             return this.usersRepository.All()
-                .Where(x => x.UserName != GlobalConstants.AdminUserName)
+                .Where(x => x.UserName != AdminUserName)
                 .OrderByDescending(x => x.CreatedOn)
                 .ToList()
                 .Select(x => new UsersViewModel

@@ -83,7 +83,7 @@
                    PropertyNumber = x.Property.Number,
                })
                .OrderByDescending(x => x.PropertyNumber)
-               .AsEnumerable();
+               .ToList();
 
             var model = new TaxesListViewModel
             {
@@ -126,7 +126,7 @@
                })
                .OrderByDescending(x => x.Year)
                .ThenByDescending(x => x.Month)
-               .AsEnumerable();
+               .ToList();
 
             var model = new TaxesListViewModel
             {

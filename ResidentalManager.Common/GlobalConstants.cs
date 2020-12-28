@@ -10,11 +10,10 @@
 
         public const string AdminUserName = "admin@mail.com";
 
-        public const string AdminPassword = "admin@mail.com";
-
         public const string Currency = " лв.";
 
         public const string SystemEmail = "victor.stanoev@gymrealm.com";
 
+        public const int ExpencesOnOnePage = 12;
     }
 }

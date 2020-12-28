@@ -12,6 +12,8 @@
 
         public int RealEstateId { get; set; }
 
+        public int RealEstateFloors { get; set; }
+
         public int Number { get; set; }
 
         public int Floor { get; set; }

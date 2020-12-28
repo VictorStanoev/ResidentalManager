@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ResidentalManager.Common;
     using ResidentalManager.Data.Common.Repositories;
     using ResidentalManager.Data.Models;
     using ResidentalManager.Web.ViewModels.Expences;
@@ -18,7 +19,6 @@
 
         public async Task CreateAsync(int realEstateId, CreateExpencesInputModel inputModel)
         {
-
             var fee = new RealEstateExpence()
             {
                 RealEstateId = realEstateId,
@@ -33,20 +33,13 @@
             await this.expenceRepository.SaveChangesAsync();
         }
 
-        public AllExpencesViewModel Get(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public ExpencesListViewModel GetAll(int realEstateId, int pageNum)
         {
-            var expencesOnPage = 12;
-
             var expences = this.expenceRepository.AllAsNoTracking()
                 .Where(x => x.RealEstateId == realEstateId)
                  .OrderByDescending(x => x.Year)
                 .ThenByDescending(x => x.Month)
-                .Skip((pageNum - 1) * expencesOnPage).Take(expencesOnPage)
+                .Skip((pageNum - 1) * GlobalConstants.ExpencesOnOnePage).Take(GlobalConstants.ExpencesOnOnePage)
                 .Select(x => new AllExpencesViewModel
                 {
                    Month = x.Month,
@@ -64,16 +57,13 @@
             var model = new ExpencesListViewModel
             {
                 PageNumber = pageNum,
-                ItemsPerPage = expencesOnPage,
+                ItemsPerPage = GlobalConstants.ExpencesOnOnePage,
                 ExpencesCount = this.GetCountRealEstateExpences(realEstateId),
                 Expences = expences,
             };
 
             return model;
         }
-
-        private int GetCountRealEstateExpences(int realEstateId)
-            => this.expenceRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
 
         public async Task DeleteAsync(int id)
         {
@@ -82,5 +72,8 @@
             this.expenceRepository.Delete(expence);
             await this.expenceRepository.SaveChangesAsync();
         }
+
+        private int GetCountRealEstateExpences(int realEstateId)
+            => this.expenceRepository.All().Where(x => x.RealEstateId == realEstateId).Count();
     }
 }

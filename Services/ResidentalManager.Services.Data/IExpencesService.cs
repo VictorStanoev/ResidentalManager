@@ -10,8 +10,6 @@
 
         ExpencesListViewModel GetAll(int realEstateId, int pageNum);
 
-        AllExpencesViewModel Get(int id);
-
         Task DeleteAsync(int id);
     }
 }

@@ -9,10 +9,21 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-row">
         <div class="form-group col-md-3">
+            <label asp-for="@Model.Floor" class=""></label>
+            <select asp-for="@Model.Floor" class="browser-default custom-select">
+                <option value=""></option>
+                @for (int i = 0; i <= Model.RealEstateFloors; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <span asp-validation-for="@Model.Floor" class="text-danger"></span>
+        </div>
+        @*<div class="form-group col-md-3">
             <label asp-for="@Model.Floor"></label>
             <input asp-for="@Model.Floor" class="form-control">
             <span asp-validation-for="@Model.Floor" class="text-danger"></span>
-        </div>
+        </div>*@
         <div class="form-group col-md-3">
             <label asp-for="@Model.Number"></label>
             <input asp-for="@Model.Number" class="form-control">
